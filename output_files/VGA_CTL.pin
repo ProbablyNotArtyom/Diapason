@@ -1,0 +1,215 @@
+ -- Copyright (C) 2018  Intel Corporation. All rights reserved.
+ -- Your use of Intel Corporation's design tools, logic functions 
+ -- and other software and tools, and its AMPP partner logic 
+ -- functions, and any output files from any of the foregoing 
+ -- (including device programming or simulation files), and any 
+ -- associated documentation or information are expressly subject 
+ -- to the terms and conditions of the Intel Program License 
+ -- Subscription Agreement, the Intel Quartus Prime License Agreement,
+ -- the Intel FPGA IP License Agreement, or other applicable license
+ -- agreement, including, without limitation, that your use is for
+ -- the sole purpose of programming logic devices manufactured by
+ -- Intel and sold by Intel or its authorized distributors.  Please
+ -- refer to the applicable agreement for further details.
+ -- 
+ -- This is a Quartus Prime output file. It is for reporting purposes only, and is
+ -- not intended for use as a Quartus Prime input file. This file cannot be used
+ -- to make Quartus Prime pin assignments - for instructions on how to make pin
+ -- assignments, please see Quartus Prime help.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- NC            : No Connect. This pin has no internal connection to the device.
+ -- DNU           : Do Not Use. This pin MUST NOT be connected.
+ -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.2V).
+ -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
+ --                 of its bank.
+ --                  Bank 1A:       2.5V
+ --                  Bank 1B:       2.5V
+ --                  Bank 2:       2.5V
+ --                  Bank 3:       2.5V
+ --                  Bank 4:       2.5V
+ --                  Bank 5:       2.5V
+ --                  Bank 6:       2.5V
+ --                  Bank 7:       2.5V
+ --                  Bank 8:       2.5V
+ -- GND           : Dedicated ground pin. Dedicated GND pins MUST be connected to GND.
+ --                  It can also be used to report unused dedicated pins. The connection
+ --                  on the board for unused dedicated pins depends on whether this will
+ --                  be used in a future design. One example is device migration. When
+ --                  using device migration, refer to the device pin-tables. If it is a
+ --                  GND pin in the pin table or if it will not be used in a future design
+ --                  for another purpose the it MUST be connected to GND. If it is an unused
+ --                  dedicated pin, then it can be connected to a valid signal on the board
+ --                  (low, high, or toggling) if that signal is required for a different
+ --                  revision of the design.
+ -- GND+          : Unused input pin. It can also be used to report unused dual-purpose pins.
+ --                  This pin should be connected to GND. It may also be connected  to a
+ --                  valid signal  on the board  (low, high, or toggling)  if that signal
+ --                  is required for a different revision of the design.
+ -- GND*          : Unused  I/O  pin. Connect each pin marked GND* directly to GND
+ --                  or leave it unconnected.
+ -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
+ -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
+ -- RESERVED_INPUT_WITH_WEAK_PULLUP    : Pin is tri-stated with internal weak pull-up resistor.
+ -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
+ -- RESERVED_OUTPUT_DRIVEN_HIGH        : Pin is output driven high.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- Pin directions (input, output or bidir) are based on device operating in user mode.
+ ---------------------------------------------------------------------------------
+
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+CHIP  "VGA_CTL"  ASSIGNED TO AN: 10M04SCE144C8G
+
+Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
+-------------------------------------------------------------------------------------------------------------
+VCC_ONE                      : 1         : power  :                   : 3.0V/3.3V :           :                
+VCCA6                        : 2         : power  :                   : 3.0V/3.3V :           :                
+GND                          : 3         : gnd    :                   :         :           :                
+GND                          : 4         : gnd    :                   :         :           :                
+VCCA3                        : 5         : power  :                   : 3.0V/3.3V :           :                
+vram_a_bus[10]               : 6         : output : 2.5 V             :         : 1A        : N              
+vram_a_bus[13]               : 7         : output : 2.5 V             :         : 1A        : N              
+vram_a_bus[2]                : 8         : output : 2.5 V             :         : 1A        : N              
+VCCIO1A                      : 9         : power  :                   : 2.5V    : 1A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 10        :        :                   :         : 1A        :                
+vram_a_bus[9]                : 11        : output : 2.5 V             :         : 1A        : N              
+vram_a_bus[8]                : 12        : output : 2.5 V             :         : 1A        : N              
+vram_a_bus[3]                : 13        : output : 2.5 V             :         : 1A        : N              
+vram_a_bus[7]                : 14        : output : 2.5 V             :         : 1A        : N              
+vram_d_bus[1]                : 15        : input  : 2.5 V             :         : 1B        : N              
+~ALTERA_TMS~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 16        : input  : 2.5 V Schmitt Trigger :         : 1B        : N              
+vga_vsync                    : 17        : output : 2.5 V             :         : 1B        : N              
+~ALTERA_TCK~ / RESERVED_INPUT : 18        : input  : 2.5 V Schmitt Trigger :         : 1B        : N              
+~ALTERA_TDI~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 19        : input  : 2.5 V Schmitt Trigger :         : 1B        : N              
+~ALTERA_TDO~                 : 20        : output : 2.5 V             :         : 1B        : N              
+vram_a_bus[1]                : 21        : output : 2.5 V             :         : 1B        : N              
+vram_a_bus[0]                : 22        : output : 2.5 V             :         : 1B        : N              
+VCCIO1B                      : 23        : power  :                   : 2.5V    : 1B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 24        :        :                   :         : 1B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 25        :        :                   :         : 1B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 26        :        :                   :         : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 27        :        :                   :         : 2         :                
+clk_main                     : 28        : input  : 2.5 V             :         : 2         : N              
+reset_in                     : 29        : input  : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 30        :        :                   :         : 2         :                
+VCCIO2                       : 31        : power  :                   : 2.5V    : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 32        :        :                   :         : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 33        :        :                   :         : 2         :                
+VCCA2                        : 34        : power  :                   : 3.0V/3.3V :           :                
+VCCA1                        : 35        : power  :                   : 3.0V/3.3V :           :                
+VCC_ONE                      : 36        : power  :                   : 3.0V/3.3V :           :                
+VCC_ONE                      : 37        : power  :                   : 3.0V/3.3V :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 38        :        :                   :         : 3         :                
+vram_a_bus[22]               : 39        : output : 2.5 V             :         : 3         : N              
+VCCIO3                       : 40        : power  :                   : 2.5V    : 3         :                
+cs_vgamem                    : 41        : input  : 2.5 V             :         : 3         : N              
+GND                          : 42        : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 43        :        :                   :         : 3         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 44        :        :                   :         : 3         :                
+vram_a_bus[21]               : 45        : output : 2.5 V             :         : 3         : N              
+vram_a_bus[23]               : 46        : output : 2.5 V             :         : 3         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 47        :        :                   :         : 3         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 48        :        :                   :         : 3         :                
+VCCIO3                       : 49        : power  :                   : 2.5V    : 3         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 50        :        :                   :         : 3         :                
+VCC_ONE                      : 51        : power  :                   : 3.0V/3.3V :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 52        :        :                   :         : 3         :                
+GND                          : 53        : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 54        :        :                   :         : 3         :                
+vram_a_bus[17]               : 55        : output : 2.5 V             :         : 3         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 56        :        :                   :         : 3         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 57        :        :                   :         : 3         :                
+vga_blank                    : 58        : output : 2.5 V             :         : 3         : N              
+vram_a_bus[15]               : 59        : output : 2.5 V             :         : 3         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 60        :        :                   :         : 3         :                
+vram_a_bus[16]               : 61        : output : 2.5 V             :         : 4         : N              
+vram_d_bus[0]                : 62        : input  : 2.5 V             :         : 4         : N              
+GND                          : 63        : gnd    :                   :         :           :                
+clk_system                   : 64        : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 65        :        :                   :         : 4         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 66        :        :                   :         : 4         :                
+VCCIO4                       : 67        : power  :                   : 2.5V    : 4         :                
+GND                          : 68        : gnd    :                   :         :           :                
+vram_a_bus[19]               : 69        : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 70        :        :                   :         : 4         :                
+VCCA5                        : 71        : power  :                   : 3.0V/3.3V :           :                
+VCC_ONE                      : 72        : power  :                   : 3.0V/3.3V :           :                
+VCC_ONE                      : 73        : power  :                   : 3.0V/3.3V :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 74        :        :                   :         : 5         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 75        :        :                   :         : 5         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 76        :        :                   :         : 5         :                
+vram_a_bus[14]               : 77        : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 78        :        :                   :         : 5         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 79        :        :                   :         : 5         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 80        :        :                   :         : 5         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 81        :        :                   :         : 5         :                
+VCCIO5                       : 82        : power  :                   : 2.5V    : 5         :                
+GND                          : 83        : gnd    :                   :         :           :                
+pixclk                       : 84        : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 85        :        :                   :         : 5         :                
+vram_d_bus[3]                : 86        : input  : 2.5 V             :         : 5         : N              
+vga_rgb_out[1]               : 87        : output : 2.5 V             :         : 5         : N              
+vga_rgb_out[6]               : 88        : output : 2.5 V             :         : 6         : N              
+vga_rgb_out[5]               : 89        : output : 2.5 V             :         : 6         : N              
+vga_rgb_out[7]               : 90        : output : 2.5 V             :         : 6         : N              
+vram_d_bus[4]                : 91        : input  : 2.5 V             :         : 6         : N              
+vga_rgb_out[4]               : 92        : output : 2.5 V             :         : 6         : N              
+vram_d_bus[2]                : 93        : input  : 2.5 V             :         : 6         : N              
+VCCIO6                       : 94        : power  :                   : 2.5V    : 6         :                
+GND                          : 95        : gnd    :                   :         :           :                
+vga_rgb_out[0]               : 96        : output : 2.5 V             :         : 6         : N              
+vga_rgb_out[2]               : 97        : output : 2.5 V             :         : 6         : N              
+vram_d_bus[7]                : 98        : input  : 2.5 V             :         : 6         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 99        :        :                   :         : 6         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 100       :        :                   :         : 6         :                
+vram_d_bus[5]                : 101       : input  : 2.5 V             :         : 6         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 102       :        :                   :         : 6         :                
+VCCIO6                       : 103       : power  :                   : 2.5V    : 6         :                
+GND                          : 104       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 105       :        :                   :         : 6         :                
+vram_a_bus[12]               : 106       : output : 2.5 V             :         : 6         : N              
+VCCA3                        : 107       : power  :                   : 3.0V/3.3V :           :                
+VCC_ONE                      : 108       : power  :                   : 3.0V/3.3V :           :                
+VCC_ONE                      : 109       : power  :                   : 3.0V/3.3V :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 110       :        :                   :         : 7         :                
+vram_a_bus[18]               : 111       : output : 2.5 V             :         : 7         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 112       :        :                   :         : 7         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 113       :        :                   :         : 7         :                
+vram_d_bus[6]                : 114       : input  : 2.5 V             :         : 7         : N              
+VCC_ONE                      : 115       : power  :                   : 3.0V/3.3V :           :                
+GND                          : 116       : gnd    :                   :         :           :                
+VCCIO7                       : 117       : power  :                   : 2.5V    : 7         :                
+vram_a_bus[6]                : 118       : output : 2.5 V             :         : 7         : N              
+vram_a_bus[11]               : 119       : output : 2.5 V             :         : 7         : N              
+vram_a_bus[4]                : 120       : output : 2.5 V             :         : 8         : N              
+vram_a_bus[5]                : 121       : output : 2.5 V             :         : 8         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 122       :        :                   :         : 8         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 123       :        :                   :         : 8         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 124       :        :                   :         : 8         :                
+GND                          : 125       : gnd    :                   :         :           :                
+~ALTERA_CONFIG_SEL~ / RESERVED_INPUT : 126       : input  : 2.5 V             :         : 8         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 127       :        :                   :         : 8         :                
+VCCIO8                       : 128       : power  :                   : 2.5V    : 8         :                
+~ALTERA_nCONFIG~ / RESERVED_INPUT : 129       : input  : 2.5 V Schmitt Trigger :         : 8         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 130       :        :                   :         : 8         :                
+vga_hsync                    : 131       : output : 2.5 V             :         : 8         : N              
+vga_rgb_out[3]               : 132       : output : 2.5 V             :         : 8         : N              
+GND                          : 133       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 134       :        :                   :         : 8         :                
+vram_a_bus[20]               : 135       : output : 2.5 V             :         : 8         : N              
+~ALTERA_nSTATUS~ / RESERVED_INPUT : 136       : input  : 2.5 V Schmitt Trigger :         : 8         : N              
+GND                          : 137       : gnd    :                   :         :           :                
+~ALTERA_CONF_DONE~ / RESERVED_INPUT : 138       : input  : 2.5 V Schmitt Trigger :         : 8         : N              
+VCCIO8                       : 139       : power  :                   : 2.5V    : 8         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 140       :        :                   :         : 8         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 141       :        :                   :         : 8         :                
+GND                          : 142       : gnd    :                   :         :           :                
+VCCA4                        : 143       : power  :                   : 3.0V/3.3V :           :                
+VCC_ONE                      : 144       : power  :                   : 3.0V/3.3V :           :                

@@ -1,0 +1,12 @@
+Power Analyzer Status : Successful - Sat Jun  1 07:47:45 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : VGA_CTL
+Top-level Entity Name : VGA_CTL
+Family : MAX 10
+Device : 10M04SCE144C8G
+Power Models : Final
+Total Thermal Power Dissipation : 116.44 mW
+Core Dynamic Thermal Power Dissipation : 0.00 mW
+Core Static Thermal Power Dissipation : 110.61 mW
+I/O Thermal Power Dissipation : 5.83 mW
+Power Estimation Confidence : Low: user provided insufficient toggle rate data

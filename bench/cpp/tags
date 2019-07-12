@@ -1,0 +1,167 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/45968eff/
+BITS_PER_COLOR	vgasim.cpp	/^		VGASIM::BITS_PER_COLOR=8;$/;"	m	class:VGASIM	typeref:typename:const int
+BITS_PER_COLOR	vgasim.h	/^				BITS_PER_COLOR;$/;"	m	class:VGASIM	typeref:typename:const int
+CAIROGC	vgasim.h	/^	typedef	Cairo::RefPtr<Cairo::Context>		CAIROGC;$/;"	t	class:VGASIM	typeref:typename:Cairo::RefPtr<Cairo::Context>
+CAIROIMG	vgasim.h	/^	typedef	Cairo::RefPtr<Cairo::ImageSurface>	CAIROIMG;$/;"	t	class:VGASIM	typeref:typename:Cairo::RefPtr<Cairo::ImageSurface>
+CIMAGE	image.h	/^typedef	IMAGE<COMPLEX>		CIMAGE, *PCIMAGE;$/;"	t	typeref:typename:IMAGE<COMPLEX>
+CLOCKS_PER_PIXEL	vgasim.cpp	/^const	int	VGASIM::CLOCKS_PER_PIXEL = 1,$/;"	m	class:VGASIM	typeref:typename:const int
+CLOCKS_PER_PIXEL	vgasim.h	/^	static	const	int	CLOCKS_PER_PIXEL,$/;"	m	class:VGASIM	typeref:typename:const int
+CONTEXT	vgasim.h	/^	typedef	const Cairo::RefPtr<Cairo::Context>	CONTEXT;$/;"	t	class:VGASIM	typeref:typename:const Cairo::RefPtr<Cairo::Context>
+DIMAGE	image.h	/^typedef	IMAGE<double>		DIMAGE, *PDIMAGE;$/;"	t	typeref:typename:IMAGE<double>
+IIMAGE	image.h	/^typedef	IMAGE<int>		IIMAGE, *PIIMAGE;$/;"	t	typeref:typename:IMAGE<int>
+IMAGE	image.cpp	/^template<class PIXEL> IMAGE<PIXEL>::IMAGE(IMAGE<PIXEL> *img) {$/;"	f	class:IMAGE
+IMAGE	image.cpp	/^template<class PIXEL> IMAGE<PIXEL>::IMAGE(int h, int w) {$/;"	f	class:IMAGE
+IMAGE	image.h	/^template<class PIXEL> class IMAGE {$/;"	c
+IMAGE_H	image.h	/^#define	IMAGE_H$/;"	d
+PCIMAGE	image.h	/^typedef	IMAGE<COMPLEX>		CIMAGE, *PCIMAGE;$/;"	t	typeref:typename:IMAGE<COMPLEX> *
+PDIMAGE	image.h	/^typedef	IMAGE<double>		DIMAGE, *PDIMAGE;$/;"	t	typeref:typename:IMAGE<double> *
+PIIMAGE	image.h	/^typedef	IMAGE<int>		IIMAGE, *PIIMAGE;$/;"	t	typeref:typename:IMAGE<int> *
+PIMAGE	image.h	/^typedef	IMAGE<unsigned char>	UCIMAGE, *PIMAGE;$/;"	t	typeref:typename:IMAGE<unsigned char> *
+SMODE	videomode.h	/^	} SMODE;$/;"	t	class:VIDEOMODE	typeref:struct:VIDEOMODE::SMODE_S
+SMODE_S	videomode.h	/^	typedef struct	SMODE_S {$/;"	s	class:VIDEOMODE
+TBASSERT	testb.h	/^#define	TBASSERT(/;"	d
+TESTB	testb.h	/^	TESTB(void) : m_trace(NULL), m_tickcount(0l) {$/;"	f	class:TESTB
+TESTB	testb.h	/^template <class VA>	class TESTB {$/;"	c
+TESTBENCH	main_tb.cpp	/^	TESTBENCH(int hres, int vres) : m_test(false), m_vga(hres, vres) {$/;"	f	class:TESTBENCH	file:
+TESTBENCH	main_tb.cpp	/^	TESTBENCH(void) : m_test(false), m_vga(640, 480) {$/;"	f	class:TESTBENCH	file:
+TESTBENCH	main_tb.cpp	/^class	TESTBENCH : public TESTB<Vchartest> {$/;"	c	file:
+TESTB_H	testb.h	/^#define	TESTB_H$/;"	d
+UCIMAGE	image.h	/^typedef	IMAGE<unsigned char>	UCIMAGE, *PIMAGE;$/;"	t	typeref:typename:IMAGE<unsigned char>
+VGASIM	vgasim.h	/^	VGASIM(const char *h, const char *v) : Gtk::DrawingArea(), m_mode(h,v) {$/;"	f	class:VGASIM
+VGASIM	vgasim.h	/^	VGASIM(const int w, const int h) : Gtk::DrawingArea(), m_mode(w, h) {$/;"	f	class:VGASIM
+VGASIM	vgasim.h	/^	VGASIM(void) : Gtk::DrawingArea(), m_mode(640,480) {$/;"	f	class:VGASIM
+VGASIM	vgasim.h	/^class	VGASIM : public Gtk::DrawingArea {$/;"	c
+VGASIM_H	vgasim.h	/^#define	VGASIM_H$/;"	d
+VGAWIN	vgasim.cpp	/^VGAWIN::VGAWIN(const char *h, const char *v) {$/;"	f	class:VGAWIN
+VGAWIN	vgasim.cpp	/^VGAWIN::VGAWIN(const int w, const int h) {$/;"	f	class:VGAWIN
+VGAWIN	vgasim.cpp	/^VGAWIN::VGAWIN(void) {$/;"	f	class:VGAWIN
+VGAWIN	vgasim.h	/^class	VGAWIN	: public Gtk::Window {$/;"	c
+VIDEOMODE	videomode.h	/^	VIDEOMODE(SMODE h, SMODE v) : m_h(h), m_v(v) {$/;"	f	class:VIDEOMODE
+VIDEOMODE	videomode.h	/^	VIDEOMODE(const char *h, const char *v) {$/;"	f	class:VIDEOMODE
+VIDEOMODE	videomode.h	/^	VIDEOMODE(const int h, const int v) {$/;"	f	class:VIDEOMODE
+VIDEOMODE	videomode.h	/^class	VIDEOMODE {$/;"	c
+VIDEOMODE_H	videomode.h	/^#define	VIDEOMODE_H$/;"	d
+VVAR	main_tb.cpp	/^#define	VVAR(/;"	d	file:
+allocbuf	image.cpp	/^template<class PIXEL> void IMAGE<PIXEL>::allocbuf(int h, int w) {$/;"	f	class:IMAGE	typeref:typename:void
+close	main_tb.cpp	/^	void	close(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
+closetrace	testb.h	/^	virtual	void	closetrace(void) {$/;"	f	class:TESTB	typeref:typename:void
+cols	image.h	/^	int	cols(void) const { return m_height; }$/;"	f	class:IMAGE	typeref:typename:int
+copy	image.cpp	/^template<class PIXEL> IMAGE<PIXEL> *IMAGE<PIXEL>::copy(void) {$/;"	f	class:IMAGE	typeref:typename:IMAGE<PIXEL> *
+crop	image.cpp	/^template<class PIXEL> IMAGE<PIXEL> *IMAGE<PIXEL>::crop(int y, int x,$/;"	f	class:IMAGE	typeref:typename:IMAGE<PIXEL> *
+err	videomode.h	/^	int	err(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+eval	testb.h	/^	virtual	void	eval(void) {$/;"	f	class:TESTB	typeref:typename:void
+flipx	image.cpp	/^template<class PIXEL> void IMAGE<PIXEL>::flipx(void) {$/;"	f	class:IMAGE	typeref:typename:void
+flipy	image.cpp	/^template<class PIXEL> void IMAGE<PIXEL>::flipy(void) {$/;"	f	class:IMAGE	typeref:typename:void
+get_preferred_height_for_width_vfunc	vgasim.cpp	/^void	VGASIM::get_preferred_height_for_width_vfunc(int w, int &min, int &nw) const {$/;"	f	class:VGASIM	typeref:typename:void
+get_preferred_height_vfunc	vgasim.cpp	/^void	VGASIM::get_preferred_height_vfunc(int &min, int &nw) const {$/;"	f	class:VGASIM	typeref:typename:void
+get_preferred_width_for_height_vfunc	vgasim.cpp	/^} void	VGASIM::get_preferred_width_for_height_vfunc(int h, int &min, int &nw) const {$/;"	f	class:VGASIM	typeref:typename:void
+get_preferred_width_vfunc	vgasim.cpp	/^void	VGASIM::get_preferred_width_vfunc(int &min, int &nw) const {$/;"	f	class:VGASIM	typeref:typename:void
+hback_porch	videomode.h	/^	int	hback_porch(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+height	image.h	/^	int	height(void) const { return m_height; }$/;"	f	class:IMAGE	typeref:typename:int
+height	vgasim.h	/^	int	height(void) {$/;"	f	class:VGASIM	typeref:typename:int
+height	vgasim.h	/^	int	height(void) {$/;"	f	class:VGAWIN	typeref:typename:int
+height	videomode.h	/^	int	height(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+hporch	vgasim.h	/^	int	hporch(void) {$/;"	f	class:VGASIM	typeref:typename:int
+hporch	vgasim.h	/^	int	hporch(void) {$/;"	f	class:VGAWIN	typeref:typename:int
+hporch	videomode.h	/^	int	hporch(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+hsync	vgasim.h	/^	int	hsync(void) {$/;"	f	class:VGASIM	typeref:typename:int
+hsync	vgasim.h	/^	int	hsync(void) {$/;"	f	class:VGAWIN	typeref:typename:int
+hsync	videomode.h	/^	int	hsync(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+init	main_tb.cpp	/^	void	init(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
+init	vgasim.cpp	/^void	VGAWIN::init(void) {$/;"	f	class:VGAWIN	typeref:typename:void
+initialize	vgasim.h	/^	void	initialize(void) {$/;"	f	class:VGASIM	typeref:typename:void
+m_buf	image.h	/^	unsigned char	*m_buf;$/;"	m	class:IMAGE	typeref:typename:unsigned char *
+m_core	testb.h	/^	VA		*m_core;$/;"	m	class:TESTB	typeref:typename:VA *
+m_data	image.h	/^	PIXEL	*m_data;$/;"	m	class:IMAGE	typeref:typename:PIXEL *
+m_data	vgasim.h	/^	IMAGE<unsigned>		*m_data;$/;"	m	class:VGASIM	typeref:typename:IMAGE<unsigned> *
+m_data	videomode.h	/^		int	m_data, m_front, m_synch, m_total;$/;"	m	struct:VIDEOMODE::SMODE_S	typeref:typename:int
+m_debug	vgasim.cpp	/^const	bool	VGASIM::m_debug = false;$/;"	m	class:VGASIM	typeref:typename:const bool
+m_debug	vgasim.h	/^	static	const	bool	m_debug;$/;"	m	class:VGASIM	typeref:typename:const bool
+m_done	main_tb.cpp	/^	bool		m_done, m_test;$/;"	m	class:TESTBENCH	typeref:typename:bool	file:
+m_err	videomode.h	/^	bool	m_err;$/;"	m	class:VIDEOMODE	typeref:typename:bool
+m_front	videomode.h	/^		int	m_data, m_front, m_synch, m_total;$/;"	m	struct:VIDEOMODE::SMODE_S	typeref:typename:int
+m_gc	vgasim.h	/^	CAIROGC			m_gc;$/;"	m	class:VGASIM	typeref:typename:CAIROGC
+m_h	videomode.h	/^	SMODE	m_h, m_v;$/;"	m	class:VIDEOMODE	typeref:typename:SMODE
+m_height	image.h	/^	int	m_height, m_width;$/;"	m	class:IMAGE	typeref:typename:int
+m_hsync_count	vgasim.h	/^	int	m_vsync_count, m_hsync_count;$/;"	m	class:VGASIM	typeref:typename:int
+m_img	image.h	/^	PIXEL	**m_img;$/;"	m	class:IMAGE	typeref:typename:PIXEL **
+m_last_b	vgasim.h	/^	int	m_last_vsync, m_last_hsync, m_last_r, m_last_g, m_last_b,$/;"	m	class:VGASIM	typeref:typename:int
+m_last_g	vgasim.h	/^	int	m_last_vsync, m_last_hsync, m_last_r, m_last_g, m_last_b,$/;"	m	class:VGASIM	typeref:typename:int
+m_last_hsync	vgasim.h	/^	int	m_last_vsync, m_last_hsync, m_last_r, m_last_g, m_last_b,$/;"	m	class:VGASIM	typeref:typename:int
+m_last_r	vgasim.h	/^	int	m_last_vsync, m_last_hsync, m_last_r, m_last_g, m_last_b,$/;"	m	class:VGASIM	typeref:typename:int
+m_last_vsync	vgasim.h	/^	int	m_last_vsync, m_last_hsync, m_last_r, m_last_g, m_last_b,$/;"	m	class:VGASIM	typeref:typename:int
+m_mode	vgasim.h	/^	VIDEOMODE		m_mode;$/;"	m	class:VGASIM	typeref:typename:VIDEOMODE
+m_out_of_sync	vgasim.h	/^	bool	m_out_of_sync;$/;"	m	class:VGASIM	typeref:typename:bool
+m_pix	vgasim.h	/^	CAIROIMG		m_pix;$/;"	m	class:VGASIM	typeref:typename:CAIROIMG
+m_pixel_clock_count	vgasim.h	/^		m_pixel_clock_count;$/;"	m	class:VGASIM	typeref:typename:int
+m_synch	videomode.h	/^		int	m_data, m_front, m_synch, m_total;$/;"	m	struct:VIDEOMODE::SMODE_S	typeref:typename:int
+m_test	main_tb.cpp	/^	bool		m_done, m_test;$/;"	m	class:TESTBENCH	typeref:typename:bool	file:
+m_tickcount	testb.h	/^	uint64_t	m_tickcount;$/;"	m	class:TESTB	typeref:typename:uint64_t
+m_total	videomode.h	/^		int	m_data, m_front, m_synch, m_total;$/;"	m	struct:VIDEOMODE::SMODE_S	typeref:typename:int
+m_trace	testb.h	/^	VerilatedVcdC*	m_trace;$/;"	m	class:TESTB	typeref:typename:VerilatedVcdC *
+m_tx_busy_count	main_tb.cpp	/^	unsigned long	m_tx_busy_count;$/;"	m	class:TESTBENCH	typeref:typename:unsigned long	file:
+m_v	videomode.h	/^	SMODE	m_h, m_v;$/;"	m	class:VIDEOMODE	typeref:typename:SMODE
+m_vga	main_tb.cpp	/^	VGAWIN		m_vga;$/;"	m	class:TESTBENCH	typeref:typename:VGAWIN	file:
+m_vgasim	vgasim.h	/^	VGASIM	*m_vgasim;$/;"	m	class:VGAWIN	typeref:typename:VGASIM *
+m_vsync_count	vgasim.h	/^	int	m_vsync_count, m_hsync_count;$/;"	m	class:VGASIM	typeref:typename:int
+m_width	image.h	/^	int	m_height, m_width;$/;"	m	class:IMAGE	typeref:typename:int
+main	main_tb.cpp	/^int	main(int argc, char **argv) {$/;"	f	typeref:typename:int
+main_time	main_tb.cpp	/^vluint64_t main_time = 0;	\/\/ Current simulation time (64-bit unsigned)$/;"	v	typeref:typename:vluint64_t
+on_configure_event	vgasim.h	/^	virtual	bool	on_configure_event(GdkEventConfigure *ev) {$/;"	f	class:VGASIM	typeref:typename:bool
+on_draw	vgasim.cpp	/^bool	VGASIM::on_draw(CONTEXT &gc) {$/;"	f	class:VGASIM	typeref:typename:bool
+on_hide	vgasim.h	/^	virtual	void	on_hide() {$/;"	f	class:VGASIM	typeref:typename:void
+on_map	vgasim.h	/^	virtual	void	on_map(void) {$/;"	f	class:VGASIM	typeref:typename:void
+on_my_map	vgasim.h	/^	virtual	void	on_my_map(void) {$/;"	f	class:VGASIM	typeref:typename:void
+on_realize	vgasim.cpp	/^void	VGASIM::on_realize() {$/;"	f	class:VGASIM	typeref:typename:void
+on_show	vgasim.h	/^	virtual	void	on_show() {$/;"	f	class:VGASIM	typeref:typename:void
+on_tick	main_tb.cpp	/^	bool	on_tick(void) {$/;"	f	class:TESTBENCH	typeref:typename:bool	file:
+opentrace	testb.h	/^	virtual	void	opentrace(const char *vcdname) {$/;"	f	class:TESTB	typeref:typename:void
+operator ()	vgasim.cpp	/^void	VGASIM::operator()(const int vsync, const int hsync, const int r, const int g, const int b)/;"	f	class:VGASIM	typeref:typename:void
+operator ()	vgasim.h	/^	void	operator()(const int vsync, const int hsync, const int r, const int g, const int b) {$/;"	f	class:VGAWIN	typeref:typename:void
+pixels_per_frame	videomode.h	/^	int	pixels_per_frame(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+raw_height	vgasim.h	/^	int	raw_height(void) {$/;"	f	class:VGASIM	typeref:typename:int
+raw_height	vgasim.h	/^	int	raw_height(void) {$/;"	f	class:VGAWIN	typeref:typename:int
+raw_height	videomode.h	/^	int	raw_height(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+raw_width	vgasim.h	/^	int	raw_width(void) {$/;"	f	class:VGASIM	typeref:typename:int
+raw_width	vgasim.h	/^	int	raw_width(void) {$/;"	f	class:VGAWIN	typeref:typename:int
+raw_width	videomode.h	/^	int	raw_width(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+reset	testb.h	/^	virtual	void	reset(void) {$/;"	f	class:TESTB	typeref:typename:void
+rows	image.h	/^	int	rows(void) const { return m_width; }$/;"	f	class:IMAGE	typeref:typename:int
+sc_time_stamp	main_tb.cpp	/^double sc_time_stamp () {	\/\/ Called by $time in Verilog$/;"	f	typeref:typename:double
+setline	videomode.h	/^	void	setline(SMODE &m, const char *ln) {$/;"	f	class:VIDEOMODE	typeref:typename:void
+signal_map	vgasim.h	/^	virtual	void	signal_map(void) {$/;"	f	class:VGASIM	typeref:typename:void
+size	image.h	/^	long	size(void) const { return m_height*m_width; }$/;"	f	class:IMAGE	typeref:typename:long
+sync_lines	videomode.h	/^	int	sync_lines(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+sync_pixels	videomode.h	/^	int	sync_pixels(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+syncd	vgasim.h	/^	bool	syncd(void) { return !m_out_of_sync; }$/;"	f	class:VGASIM	typeref:typename:bool
+syncd	vgasim.h	/^	bool	syncd(void) { return m_vgasim->syncd(); }$/;"	f	class:VGAWIN	typeref:typename:bool
+tb	main_tb.cpp	/^TESTBENCH	*tb;$/;"	v	typeref:typename:TESTBENCH *
+test_input	main_tb.cpp	/^	void	test_input(bool test_data) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
+tick	main_tb.cpp	/^	void	tick(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
+tick	testb.h	/^	virtual	void	tick(void) {$/;"	f	class:TESTB	typeref:typename:void
+tickcount	testb.h	/^	unsigned long	tickcount(void) {$/;"	f	class:TESTB	typeref:typename:unsigned long
+trace	main_tb.cpp	/^	void	trace(const char *vcd_trace_file_name) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
+vback_porch	videomode.h	/^	int	vback_porch(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+vporch	vgasim.h	/^	int	vporch(void) {$/;"	f	class:VGASIM	typeref:typename:int
+vporch	vgasim.h	/^	int	vporch(void) {$/;"	f	class:VGAWIN	typeref:typename:int
+vporch	videomode.h	/^	int	vporch(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+vram_mem_array	main_tb.cpp	/^char *vram_mem_array;$/;"	v	typeref:typename:char *
+vram_preload	main_tb.cpp	/^const char *vram_preload = {$/;"	v	typeref:typename:const char *
+vsync	vgasim.h	/^	int	vsync(void) {$/;"	f	class:VGASIM	typeref:typename:int
+vsync	vgasim.h	/^	int	vsync(void) {$/;"	f	class:VGAWIN	typeref:typename:int
+vsync	videomode.h	/^	int	vsync(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+width	image.h	/^	int	width(void) const { return m_width; }$/;"	f	class:IMAGE	typeref:typename:int
+width	vgasim.h	/^	int	width(void) {$/;"	f	class:VGASIM	typeref:typename:int
+width	vgasim.h	/^	int	width(void) {$/;"	f	class:VGAWIN	typeref:typename:int
+width	videomode.h	/^	int	width(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+zeroize	image.cpp	/^template<class PIXEL> void IMAGE<PIXEL>::zeroize(void) {$/;"	f	class:IMAGE	typeref:typename:void
+zeromode	videomode.h	/^	void	zeromode(SMODE &m) {$/;"	f	class:VIDEOMODE	typeref:typename:void
+~IMAGE	image.h	/^	~IMAGE() { delete[] m_buf; }$/;"	f	class:IMAGE
+~TESTB	testb.h	/^	virtual ~TESTB(void) {$/;"	f	class:TESTB
+~VGAWIN	vgasim.h	/^	~VGAWIN(void) { delete m_vgasim; }$/;"	f	class:VGAWIN

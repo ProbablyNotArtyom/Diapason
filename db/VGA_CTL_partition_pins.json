@@ -1,0 +1,189 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "pixclk",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[0]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[1]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[2]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[3]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[4]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[5]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[6]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[7]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[8]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[9]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[10]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[11]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[12]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[13]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[14]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[15]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[16]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[17]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[18]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[19]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[20]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[21]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[22]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_a_bus[23]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_hsync",
+					"strict" : false
+				},
+				{
+					"name" : "vga_vsync",
+					"strict" : false
+				},
+				{
+					"name" : "vga_rgb_out[0]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_rgb_out[1]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_rgb_out[2]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_rgb_out[3]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_rgb_out[4]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_rgb_out[5]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_rgb_out[6]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_rgb_out[7]",
+					"strict" : false
+				},
+				{
+					"name" : "reset_in",
+					"strict" : false
+				},
+				{
+					"name" : "clk_main",
+					"strict" : false
+				},
+				{
+					"name" : "vram_d_bus[0]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_d_bus[1]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_d_bus[2]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_d_bus[3]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_d_bus[4]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_d_bus[5]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_d_bus[6]",
+					"strict" : false
+				},
+				{
+					"name" : "vram_d_bus[7]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

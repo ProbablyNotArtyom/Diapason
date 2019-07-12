@@ -1,0 +1,18 @@
+Fitter Status : Successful - Sat Jun  1 08:08:03 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : VGA_CTL
+Top-level Entity Name : VGA_CTL
+Family : MAX 10
+Device : 10M04SCE144C8G
+Timing Models : Final
+Total logic elements : 1,716 / 4,032 ( 43 % )
+    Total combinational functions : 1,699 / 4,032 ( 42 % )
+    Dedicated logic registers : 80 / 4,032 ( 2 % )
+Total registers : 80
+Total pins : 48 / 101 ( 48 % )
+Total virtual pins : 0
+Total memory bits : 0 / 193,536 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 40 ( 0 % )
+Total PLLs : 0 / 1 ( 0 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0
