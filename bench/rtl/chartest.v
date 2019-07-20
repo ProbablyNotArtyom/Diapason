@@ -7,7 +7,9 @@ i_vm_height,i_vm_porch, i_vm_synch, i_vm_raw,
 
 o_vga_vsync, o_vga_hsync, o_vga_red, o_vga_grn, o_vga_blu, o_interrupt,
 
-o_vram_addr, i_vram_data
+o_vram_addr, i_vram_data,
+
+o_cpu_a_bus, io_cpu_d_bus, o_cpu_rw, o_vga_select, i_vga_interrupt, o_cpu_ack
 );
 
 	parameter	BW=32,
@@ -36,6 +38,12 @@ o_vram_addr, i_vram_data
 
 	wire sysclk, o_vga_blanking;
 
+	input 	wire 			o_cpu_rw, o_vga_select;
+	output 	wire  			i_vga_interrupt, o_cpu_ack;
+	input 	wire 	[7:0]	o_cpu_a_bus;
+	input 	wire 	[7:0]	io_cpu_d_bus;
+
+
 VGA_CTL	vga_interface_0(
 	.clk_main(i_clk),
 	.reset_in(i_reset),
@@ -48,7 +56,14 @@ VGA_CTL	vga_interface_0(
 	.vga_rgb_out(vga_rgb),
 
 	.vram_a_bus(o_vram_addr),
-	.vram_d_bus(i_vram_data)
+	.vram_d_bus(i_vram_data),
+
+	.cpu_a_bus(o_cpu_a_bus),
+	.cpu_d_bus(io_cpu_d_bus),
+	.cpu_rw(o_cpu_rw),
+	.vga_select(o_vga_select),
+	.vga_interrupt(i_vga_interrupt),
+	.cpu_ack(o_cpu_ack)
 );
 
 	always @(*)

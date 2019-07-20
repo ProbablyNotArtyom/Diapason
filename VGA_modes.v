@@ -112,6 +112,11 @@ charmem charset_rom(
 	.bit_out(pixel_out)
 );
 
+always @(*) begin
+	if (raster_x == 0)
+		b_state = 1;
+end
+
 endmodule
 
 //----------------------------------
@@ -134,7 +139,7 @@ reg			b_state;
 always @(posedge clk_in) begin
 	if (active == 0) begin
 		if (b_state) begin
-			address_out = (320 * raster_y[9:1]) + raster_x[9:1];
+			address_out = ((320 * raster_y[9:1]) + raster_x[9:1]);
 			rgb_out = data_in;
 			b_state = ~b_state;
 		end else begin
@@ -144,6 +149,11 @@ always @(posedge clk_in) begin
 		b_state = 1;
 		rgb_out = 8'h00;
 	end
+end
+
+always @(*) begin
+	if (raster_x == 0)
+		b_state = 1;
 end
 
 endmodule

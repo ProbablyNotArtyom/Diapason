@@ -4,9 +4,11 @@
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
-!_TAG_PROGRAM_VERSION	0.0.0	/45968eff/
+!_TAG_PROGRAM_VERSION	0.0.0	/3fdf28bc/
 BITS_PER_COLOR	vgasim.cpp	/^		VGASIM::BITS_PER_COLOR=8;$/;"	m	class:VGASIM	typeref:typename:const int
 BITS_PER_COLOR	vgasim.h	/^				BITS_PER_COLOR;$/;"	m	class:VGASIM	typeref:typename:const int
+B_READ	main_tb.cpp	/^#define		B_READ	/;"	d	file:
+B_WRITE	main_tb.cpp	/^#define		B_WRITE	/;"	d	file:
 CAIROGC	vgasim.h	/^	typedef	Cairo::RefPtr<Cairo::Context>		CAIROGC;$/;"	t	class:VGASIM	typeref:typename:Cairo::RefPtr<Cairo::Context>
 CAIROIMG	vgasim.h	/^	typedef	Cairo::RefPtr<Cairo::ImageSurface>	CAIROIMG;$/;"	t	class:VGASIM	typeref:typename:Cairo::RefPtr<Cairo::ImageSurface>
 CIMAGE	image.h	/^typedef	IMAGE<COMPLEX>		CIMAGE, *PCIMAGE;$/;"	t	typeref:typename:IMAGE<COMPLEX>
@@ -49,6 +51,7 @@ VIDEOMODE	videomode.h	/^class	VIDEOMODE {$/;"	c
 VIDEOMODE_H	videomode.h	/^#define	VIDEOMODE_H$/;"	d
 VVAR	main_tb.cpp	/^#define	VVAR(/;"	d	file:
 allocbuf	image.cpp	/^template<class PIXEL> void IMAGE<PIXEL>::allocbuf(int h, int w) {$/;"	f	class:IMAGE	typeref:typename:void
+bus_cycle	main_tb.cpp	/^#define 	bus_cycle(/;"	d	file:
 close	main_tb.cpp	/^	void	close(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 closetrace	testb.h	/^	virtual	void	closetrace(void) {$/;"	f	class:TESTB	typeref:typename:void
 cols	image.h	/^	int	cols(void) const { return m_height; }$/;"	f	class:IMAGE	typeref:typename:int
@@ -73,6 +76,10 @@ hporch	videomode.h	/^	int	hporch(void) const {$/;"	f	class:VIDEOMODE	typeref:typ
 hsync	vgasim.h	/^	int	hsync(void) {$/;"	f	class:VGASIM	typeref:typename:int
 hsync	vgasim.h	/^	int	hsync(void) {$/;"	f	class:VGAWIN	typeref:typename:int
 hsync	videomode.h	/^	int	hsync(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+i0_scroll_x	main_tb.cpp	/^int i0_scroll_x = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
+i0_scroll_y	main_tb.cpp	/^int i0_scroll_y = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
+i1_scroll_x	main_tb.cpp	/^int i1_scroll_x = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
+i1_scroll_y	main_tb.cpp	/^int i1_scroll_y = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
 init	main_tb.cpp	/^	void	init(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 init	vgasim.cpp	/^void	VGAWIN::init(void) {$/;"	f	class:VGAWIN	typeref:typename:void
 initialize	vgasim.h	/^	void	initialize(void) {$/;"	f	class:VGASIM	typeref:typename:void
@@ -91,6 +98,8 @@ m_h	videomode.h	/^	SMODE	m_h, m_v;$/;"	m	class:VIDEOMODE	typeref:typename:SMODE
 m_height	image.h	/^	int	m_height, m_width;$/;"	m	class:IMAGE	typeref:typename:int
 m_hsync_count	vgasim.h	/^	int	m_vsync_count, m_hsync_count;$/;"	m	class:VGASIM	typeref:typename:int
 m_img	image.h	/^	PIXEL	**m_img;$/;"	m	class:IMAGE	typeref:typename:PIXEL **
+m_irq_count	main_tb.cpp	/^	int			m_irq_count = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
+m_irq_cycle	main_tb.cpp	/^	bool		m_irq_cycle = false;$/;"	m	class:TESTBENCH	typeref:typename:bool	file:
 m_last_b	vgasim.h	/^	int	m_last_vsync, m_last_hsync, m_last_r, m_last_g, m_last_b,$/;"	m	class:VGASIM	typeref:typename:int
 m_last_g	vgasim.h	/^	int	m_last_vsync, m_last_hsync, m_last_r, m_last_g, m_last_b,$/;"	m	class:VGASIM	typeref:typename:int
 m_last_hsync	vgasim.h	/^	int	m_last_vsync, m_last_hsync, m_last_r, m_last_g, m_last_b,$/;"	m	class:VGASIM	typeref:typename:int
@@ -111,6 +120,7 @@ m_vga	main_tb.cpp	/^	VGAWIN		m_vga;$/;"	m	class:TESTBENCH	typeref:typename:VGAWI
 m_vgasim	vgasim.h	/^	VGASIM	*m_vgasim;$/;"	m	class:VGAWIN	typeref:typename:VGASIM *
 m_vsync_count	vgasim.h	/^	int	m_vsync_count, m_hsync_count;$/;"	m	class:VGASIM	typeref:typename:int
 m_width	image.h	/^	int	m_height, m_width;$/;"	m	class:IMAGE	typeref:typename:int
+m_written_configs	main_tb.cpp	/^	int			m_written_configs = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
 main	main_tb.cpp	/^int	main(int argc, char **argv) {$/;"	f	typeref:typename:int
 main_time	main_tb.cpp	/^vluint64_t main_time = 0;	\/\/ Current simulation time (64-bit unsigned)$/;"	v	typeref:typename:vluint64_t
 on_configure_event	vgasim.h	/^	virtual	bool	on_configure_event(GdkEventConfigure *ev) {$/;"	f	class:VGASIM	typeref:typename:bool
@@ -125,6 +135,8 @@ opentrace	testb.h	/^	virtual	void	opentrace(const char *vcdname) {$/;"	f	class:T
 operator ()	vgasim.cpp	/^void	VGASIM::operator()(const int vsync, const int hsync, const int r, const int g, const int b)/;"	f	class:VGASIM	typeref:typename:void
 operator ()	vgasim.h	/^	void	operator()(const int vsync, const int hsync, const int r, const int g, const int b) {$/;"	f	class:VGAWIN	typeref:typename:void
 pixels_per_frame	videomode.h	/^	int	pixels_per_frame(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+raster_irq_0	main_tb.cpp	/^int raster_irq_0 = 0x60;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
+raster_irq_1	main_tb.cpp	/^int raster_irq_1 = 0x00;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
 raw_height	vgasim.h	/^	int	raw_height(void) {$/;"	f	class:VGASIM	typeref:typename:int
 raw_height	vgasim.h	/^	int	raw_height(void) {$/;"	f	class:VGAWIN	typeref:typename:int
 raw_height	videomode.h	/^	int	raw_height(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
@@ -143,7 +155,7 @@ syncd	vgasim.h	/^	bool	syncd(void) { return !m_out_of_sync; }$/;"	f	class:VGASIM
 syncd	vgasim.h	/^	bool	syncd(void) { return m_vgasim->syncd(); }$/;"	f	class:VGAWIN	typeref:typename:bool
 tb	main_tb.cpp	/^TESTBENCH	*tb;$/;"	v	typeref:typename:TESTBENCH *
 test_input	main_tb.cpp	/^	void	test_input(bool test_data) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
-tick	main_tb.cpp	/^	void	tick(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
+tick	main_tb.cpp	/^	void 	tick(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 tick	testb.h	/^	virtual	void	tick(void) {$/;"	f	class:TESTB	typeref:typename:void
 tickcount	testb.h	/^	unsigned long	tickcount(void) {$/;"	f	class:TESTB	typeref:typename:unsigned long
 trace	main_tb.cpp	/^	void	trace(const char *vcd_trace_file_name) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:

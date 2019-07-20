@@ -1,5 +1,5 @@
 Flow report for VGA_CTL
-Sat Jun  1 08:08:03 2019
+Mon Jul 15 05:04:58 2019
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,7 +40,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sat Jun  1 08:08:03 2019       ;
+; Flow Status                        ; Successful - Mon Jul 15 05:04:58 2019       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; VGA_CTL                                     ;
 ; Top-level Entity Name              ; VGA_CTL                                     ;
@@ -48,10 +48,10 @@ refer to the applicable agreement for further details.
 ; Device                             ; 10M04SCE144C8G                              ;
 ; Timing Models                      ; Final                                       ;
 ; Total logic elements               ; 1,716 / 4,032 ( 43 % )                      ;
-;     Total combinational functions  ; 1,699 / 4,032 ( 42 % )                      ;
-;     Dedicated logic registers      ; 80 / 4,032 ( 2 % )                          ;
-; Total registers                    ; 80                                          ;
-; Total pins                         ; 48 / 101 ( 48 % )                           ;
+;     Total combinational functions  ; 1,708 / 4,032 ( 42 % )                      ;
+;     Dedicated logic registers      ; 93 / 4,032 ( 2 % )                          ;
+; Total registers                    ; 93                                          ;
+; Total pins                         ; 67 / 101 ( 66 % )                           ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0 / 193,536 ( 0 % )                         ;
 ; Embedded Multiplier 9-bit elements ; 0 / 40 ( 0 % )                              ;
@@ -66,7 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 06/01/2019 08:07:22 ;
+; Start date & time ; 07/15/2019 05:04:02 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; VGA_CTL             ;
 +-------------------+---------------------+
@@ -77,7 +77,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                                 ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID                           ; 53447164246366.155939084215171         ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                           ; 117482034896342.156318144214396        ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT                          ; Verilog Hdl                            ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                             ; ModelSim-Altera (Verilog)              ; <None>        ; --          ; --             ;
 ; EDA_TIME_SCALE                                  ; 1 ps                                   ; --            ; --          ; eda_simulation ;
@@ -104,9 +104,13 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:23     ; 1.0                     ; 1018 MB             ; 00:00:35                           ;
-; Fitter               ; 00:00:17     ; 1.5                     ; 1978 MB             ; 00:00:28                           ;
-; Total                ; 00:00:40     ; --                      ; --                  ; 00:01:03                           ;
+; Analysis & Synthesis ; 00:00:23     ; 1.0                     ; 1020 MB             ; 00:00:34                           ;
+; Fitter               ; 00:00:20     ; 1.4                     ; 1979 MB             ; 00:00:27                           ;
+; Assembler            ; 00:00:01     ; 1.0                     ; 801 MB              ; 00:00:01                           ;
+; Power Analyzer       ; 00:00:02     ; 1.9                     ; 1314 MB             ; 00:00:04                           ;
+; Timing Analyzer      ; 00:00:03     ; 1.9                     ; 945 MB              ; 00:00:04                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 1055 MB             ; 00:00:01                           ;
+; Total                ; 00:00:50     ; --                      ; --                  ; 00:01:11                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -117,6 +121,10 @@ refer to the applicable agreement for further details.
 +----------------------+------------------+---------------+---------------+----------------+
 ; Analysis & Synthesis ; artyom-MSCV      ; Manjaro Linux ; Manjaro Linux ; x86_64         ;
 ; Fitter               ; artyom-MSCV      ; Manjaro Linux ; Manjaro Linux ; x86_64         ;
+; Assembler            ; artyom-MSCV      ; Manjaro Linux ; Manjaro Linux ; x86_64         ;
+; Power Analyzer       ; artyom-MSCV      ; Manjaro Linux ; Manjaro Linux ; x86_64         ;
+; Timing Analyzer      ; artyom-MSCV      ; Manjaro Linux ; Manjaro Linux ; x86_64         ;
+; EDA Netlist Writer   ; artyom-MSCV      ; Manjaro Linux ; Manjaro Linux ; x86_64         ;
 +----------------------+------------------+---------------+---------------+----------------+
 
 
@@ -125,6 +133,10 @@ refer to the applicable agreement for further details.
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off VGA_CTL -c VGA_CTL
 quartus_fit --read_settings_files=off --write_settings_files=off VGA_CTL -c VGA_CTL
+quartus_asm --read_settings_files=off --write_settings_files=off VGA_CTL -c VGA_CTL
+quartus_pow --read_settings_files=off --write_settings_files=off VGA_CTL -c VGA_CTL
+quartus_sta VGA_CTL -c VGA_CTL
+quartus_eda --read_settings_files=off --write_settings_files=off VGA_CTL -c VGA_CTL
 
 
 

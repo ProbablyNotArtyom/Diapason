@@ -73,6 +73,9 @@ class	TESTBENCH : public TESTB<Vchartest> {
 private:
 	unsigned long	m_tx_busy_count;
 	bool		m_done, m_test;
+	int			m_written_configs = 0;
+	int			m_irq_count = 0;
+	bool		m_irq_cycle = false;
 public:
 	VGAWIN		m_vga;
 private:
@@ -120,7 +123,22 @@ public:
 		m_core->i_test = (m_test) ? 1:0;
 	}
 
-	void	tick(void) {
+#define		B_READ			1
+#define		B_WRITE			0
+#define 	bus_cycle(a, b, c)		\
+	m_core->o_cpu_a_bus = a;   		\
+	m_core->io_cpu_d_bus = b;  		\
+	m_core->o_vga_select = 0;     	\
+	m_core->o_cpu_rw = c;
+
+int raster_irq_1 = 0x00;
+int raster_irq_0 = 0x60;
+int i0_scroll_x = 0;
+int i0_scroll_y = 0;
+int i1_scroll_x = 0;
+int i1_scroll_y = 0;
+
+	void 	tick(void) {
 		if (m_done)
 			return;
 
@@ -129,11 +147,64 @@ public:
 			m_core->o_vga_grn,
 			m_core->o_vga_blu);
 
+		/* write the specified data only once, just after startup */
+		if (m_core->o_cpu_ack == 1) {
+			if (m_core->i_vga_interrupt == 0) {
+				m_irq_cycle = true;
+				if (m_irq_count == 0)
+					m_written_configs = 200;
+			}
+
+			if (m_written_configs == 0){ 		bus_cycle(0, 1, B_WRITE);}
+			else if (m_written_configs == 1){ 	bus_cycle(5, raster_irq_1, B_WRITE);}
+			else if (m_written_configs == 2){ 	bus_cycle(6, 0, B_WRITE);}
+			else if (m_written_configs == 3){ 	bus_cycle(4, 0b01000000, B_WRITE);}
+
+			if (m_irq_cycle == true) {
+				if (m_written_configs == 200){ 		bus_cycle(4, 0, B_READ);}
+				else if (m_written_configs == 201){ bus_cycle(5, raster_irq_0, B_WRITE);}
+				else if (m_written_configs == 202){ bus_cycle(6, 0, B_WRITE);}
+				else if (m_written_configs == 203){	bus_cycle(2, i1_scroll_x+=4, B_WRITE);}
+				else if (m_written_configs == 204){	bus_cycle(3, i1_scroll_y, B_WRITE);}
+				else if (m_written_configs == 205){	bus_cycle(0, 1, B_WRITE);}
+				else if (m_written_configs == 206){	m_written_configs = 250;}
+				else if (m_written_configs == 250) {
+					m_written_configs = 300;
+					m_irq_cycle = false;
+					printf("(IRQ1) scroll_x: %X, scroll_y: %X\n", i1_scroll_x, i1_scroll_y);
+				}
+
+				else if (m_written_configs == 300){ bus_cycle(4, 0, B_READ);}
+				else if (m_written_configs == 301){ bus_cycle(5, raster_irq_1, B_WRITE);}
+				else if (m_written_configs == 302){ bus_cycle(6, 0, B_WRITE);}
+				else if (m_written_configs == 303){	bus_cycle(2, i0_scroll_x+=2, B_WRITE);}
+				else if (m_written_configs == 304){	bus_cycle(3, i0_scroll_y+=2, B_WRITE);}
+				else if (m_written_configs == 305){	bus_cycle(0, 1, B_WRITE);}
+				else if (m_written_configs == 306){	m_written_configs = 350;}
+				else if (m_written_configs == 350) {
+					m_written_configs = 200;
+					m_irq_cycle = false;
+					printf("(IRQ0) scroll_x: %X, scroll_y: %X\n", i0_scroll_x, i0_scroll_y);
+				}
+			}
+		}
 
 		m_core->i_vram_data = vram_mem_array[m_core->o_vram_addr];
 		TESTB<Vchartest>::tick();
 		m_core->i_vram_data = vram_mem_array[m_core->o_vram_addr];
 		TESTB<Vchartest>::tick();
+
+		/* once the VGA controller sees our bus request it will pull ACK low */
+		/* after that, its safe to end the bus cycle */
+		if (m_core->o_cpu_ack == 0) {
+			m_core->o_cpu_a_bus = 0x00;
+			m_core->io_cpu_d_bus = 0x00;
+			m_core->o_vga_select = 1;
+			m_core->o_cpu_rw = 1;
+			m_written_configs++;
+			if (m_irq_cycle == true)
+				m_irq_count = 1;
+		}
 	}
 
 	bool	on_tick(void) {
