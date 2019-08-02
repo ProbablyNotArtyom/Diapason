@@ -58,6 +58,7 @@
 #define	VVAR(A)	v__DOT_ ## A
 #endif
 
+bool do_debug = false;
 const char *vram_preload = {
 		"The 601 is the first implementation of the PowerPC family of RISC microprocessors. The 601 implements the 32-bit portion of the PowerPC architecture, which provides 32-bit effective addresses, integer data types of 8, 16, and 32 bits, and floating-point data types of 32 and 64 bits. For 64-bit PowerPC implementations, the PowerPC architecture provides 64-bit integer data types, 64-bit addressing, and other features required to complete the 64-bit architecture. The 601 is a superscalar processor capable of issuing and retiring three instructions per clock, one to each of three execution units. Instructions can complete out of order for increased performance; however, the 601 makes execution appear sequential. The 601 integrates three execution units—an integer unit (IU), a branch processing unit (BPU), and a floating-point unit (FPU). The ability to execute three instructions in parallel and the use of simple instructions with rapid execution times yield high efficiency and throughput for 601-based systems. Most integer instructions execute in one clock cycle. The FPU is pipelined so a single-precision multiply-add instruction can be issued every clock cycle. The 601 provides an on-chip, 32-Kbyte, eight-way set-associative, physically addressed, unified instruction and data cache and an on-chip memory management unit (MMU). The MMU contains a 256-entry, two-way set-associative, unified translation lookaside buffer (UTLB) and provides support for demand-paged virtual memory address translation and variable-sized block translation. Both the UTLB and the cache use least recently used (LRU) replacement algorithms. The 601 has a 64-bit data bus and a 32-bit address bus. The 601 interface protocol allows multiple masters to compete for system resources through a central external arbiter. Additionally, on-chip snooping logic maintains cache coherency in multiprocessor applications. The 601 supports single-beat and burst data transfers for memory accesses; it also supports both memory-mapped I/O and direct-store addressing. The 601 uses an advanced CMOS (complementary metal-oxide semiconductor) process technology and maintains full interface compatibility with TTL devices. The 601v is functionally equivalent to the 601, but operates with reduced internal voltages and with reduced power dissipation. "
 };
@@ -130,13 +131,50 @@ public:
 	m_core->io_cpu_d_bus = b;  		\
 	m_core->o_vga_select = 0;     	\
 	m_core->o_cpu_rw = c;
+#define 	u16_get_hi(val)		(uint8_t)((val >> 8) & 0x00FF)
+#define 	u16_get_lo(val)		(uint8_t)(val & 0x00FF)
 
-int raster_irq_1 = 0x00;
-int raster_irq_0 = 0x60;
-int i0_scroll_x = 0;
-int i0_scroll_y = 0;
-int i1_scroll_x = 0;
-int i1_scroll_y = 0;
+//=========================== RASTER SPLITS ===========================
+
+#define		GFX_BMP		1
+#define		GFX_TXT		0
+
+#define 	GCFG_LOWRES_X 	0b00000001
+#define 	GCFG_LOWRES_Y	0b00000010
+
+//---------------------------------------------------------------------
+
+uint16_t	i0_split_end = 119;
+uint16_t	i1_split_end = 239;
+uint16_t	i2_split_end = 359;
+uint16_t	i3_split_end = 479;
+
+uint8_t		i0_scroll_x = 0,		i0_x_inc = 1;
+uint8_t		i0_scroll_y = 0,		i0_y_inc = 0;
+uint8_t		i0_gfx_mode = GFX_BMP;
+uint8_t 	i0_gfx_cfg  = 0;
+
+uint8_t		i1_scroll_x = 0,		i1_x_inc = 0;
+uint8_t		i1_scroll_y = 0,		i1_y_inc = 0;
+uint8_t		i1_gfx_mode = GFX_TXT;
+uint8_t 	i1_gfx_cfg  = GCFG_LOWRES_X;
+
+uint8_t		i2_scroll_x = 0,		i2_x_inc = 0;
+uint8_t		i2_scroll_y = 0,		i2_y_inc = 0;
+uint8_t		i2_gfx_mode = GFX_BMP;
+uint8_t 	i2_gfx_cfg  = 0;
+
+uint8_t		i3_scroll_x = 0,		i3_x_inc = 2;
+uint8_t		i3_scroll_y = 0,		i3_y_inc = 1;
+uint8_t		i3_gfx_mode = GFX_TXT;
+uint8_t 	i3_gfx_cfg  = GCFG_LOWRES_X | GCFG_LOWRES_Y;
+
+//=====================================================================
+
+// Delay the first bus cycle by however many frames
+#define		BUS_CYCLE_DELAY	0
+char		vsync_state_last = 0;
+int			bustest_delay_start = BUS_CYCLE_DELAY;
 
 	void 	tick(void) {
 		if (m_done)
@@ -147,44 +185,82 @@ int i1_scroll_y = 0;
 			m_core->o_vga_grn,
 			m_core->o_vga_blu);
 
-		/* write the specified data only once, just after startup */
-		if (m_core->o_cpu_ack == 1) {
-			if (m_core->i_vga_interrupt == 0) {
-				m_irq_cycle = true;
-				if (m_irq_count == 0)
-					m_written_configs = 200;
-			}
-
-			if (m_written_configs == 0){ 		bus_cycle(0, 1, B_WRITE);}
-			else if (m_written_configs == 1){ 	bus_cycle(5, raster_irq_1, B_WRITE);}
-			else if (m_written_configs == 2){ 	bus_cycle(6, 0, B_WRITE);}
-			else if (m_written_configs == 3){ 	bus_cycle(4, 0b01000000, B_WRITE);}
-
-			if (m_irq_cycle == true) {
-				if (m_written_configs == 200){ 		bus_cycle(4, 0, B_READ);}
-				else if (m_written_configs == 201){ bus_cycle(5, raster_irq_0, B_WRITE);}
-				else if (m_written_configs == 202){ bus_cycle(6, 0, B_WRITE);}
-				else if (m_written_configs == 203){	bus_cycle(2, i1_scroll_x+=4, B_WRITE);}
-				else if (m_written_configs == 204){	bus_cycle(3, i1_scroll_y, B_WRITE);}
-				else if (m_written_configs == 205){	bus_cycle(0, 1, B_WRITE);}
-				else if (m_written_configs == 206){	m_written_configs = 250;}
-				else if (m_written_configs == 250) {
-					m_written_configs = 300;
-					m_irq_cycle = false;
-					printf("(IRQ1) scroll_x: %X, scroll_y: %X\n", i1_scroll_x, i1_scroll_y);
+		if (bustest_delay_start == 0) {
+			/* write the specified data only once, just after startup */
+			if (m_core->o_cpu_ack == 1) {
+				if (m_core->i_vga_interrupt == 0) {
+					m_irq_cycle = true;
+					if (m_irq_count == 0)
+						m_written_configs = 200;
 				}
 
-				else if (m_written_configs == 300){ bus_cycle(4, 0, B_READ);}
-				else if (m_written_configs == 301){ bus_cycle(5, raster_irq_1, B_WRITE);}
-				else if (m_written_configs == 302){ bus_cycle(6, 0, B_WRITE);}
-				else if (m_written_configs == 303){	bus_cycle(2, i0_scroll_x+=2, B_WRITE);}
-				else if (m_written_configs == 304){	bus_cycle(3, i0_scroll_y+=2, B_WRITE);}
-				else if (m_written_configs == 305){	bus_cycle(0, 1, B_WRITE);}
-				else if (m_written_configs == 306){	m_written_configs = 350;}
-				else if (m_written_configs == 350) {
-					m_written_configs = 200;
-					m_irq_cycle = false;
-					printf("(IRQ0) scroll_x: %X, scroll_y: %X\n", i0_scroll_x, i0_scroll_y);
+				if (m_written_configs == 0){ 		bus_cycle(0, i0_gfx_mode, B_WRITE);}
+				else if (m_written_configs == 1){ 	bus_cycle(5, u16_get_lo(i0_split_end), B_WRITE);}
+				else if (m_written_configs == 2){ 	bus_cycle(6, u16_get_hi(i0_split_end), B_WRITE);}
+				else if (m_written_configs == 3){	bus_cycle(2, i0_scroll_x+=i0_x_inc, B_WRITE);}
+				else if (m_written_configs == 4){	bus_cycle(3, i0_scroll_y+=i0_y_inc, B_WRITE);}
+				else if (m_written_configs == 5){ 	bus_cycle(4, 0b01000000, B_WRITE);}
+
+				if (m_irq_cycle == true) {
+					if (m_written_configs == 200){ 		bus_cycle(4, 0, B_READ);}
+					else if (m_written_configs == 201){ bus_cycle(5, u16_get_lo(i0_split_end), B_WRITE);}
+					else if (m_written_configs == 202){ bus_cycle(6, u16_get_hi(i0_split_end), B_WRITE);}
+					else if (m_written_configs == 203){	bus_cycle(2, i0_scroll_x+=i0_x_inc, B_WRITE);}
+					else if (m_written_configs == 204){	bus_cycle(3, i0_scroll_y+=i0_y_inc, B_WRITE);}
+					else if (m_written_configs == 205){	bus_cycle(0, i0_gfx_mode, B_WRITE);}
+					else if (m_written_configs == 206){	bus_cycle(1, i0_gfx_cfg, B_WRITE);}
+					else if (m_written_configs == 207){	m_written_configs = 250;}
+					else if (m_written_configs == 250) {
+						m_written_configs = 300;
+						m_irq_cycle = false;
+						if (do_debug)
+							printf("(0) scroll_x: %02X, scroll_y: %02X   ", i0_scroll_x, i0_scroll_y);
+					}
+
+					else if (m_written_configs == 300){ bus_cycle(4, 0, B_READ);}
+					else if (m_written_configs == 301){ bus_cycle(5, u16_get_lo(i1_split_end), B_WRITE);}
+					else if (m_written_configs == 302){ bus_cycle(6, u16_get_hi(i1_split_end), B_WRITE);}
+					else if (m_written_configs == 303){	bus_cycle(2, i1_scroll_x+=i1_x_inc, B_WRITE);}
+					else if (m_written_configs == 304){	bus_cycle(3, i1_scroll_y+=i1_y_inc, B_WRITE);}
+					else if (m_written_configs == 305){	bus_cycle(0, i1_gfx_mode, B_WRITE);}
+					else if (m_written_configs == 306){	bus_cycle(1, i1_gfx_cfg++, B_WRITE);}
+					else if (m_written_configs == 307){	m_written_configs = 350;}
+					else if (m_written_configs == 350) {
+						m_written_configs = 400;
+						m_irq_cycle = false;
+						if (do_debug)
+							printf("(1) scroll_x: %02X, scroll_y: %02X   ", i1_scroll_x, i1_scroll_y);
+					}
+
+					else if (m_written_configs == 400){ bus_cycle(4, 0, B_READ);}
+					else if (m_written_configs == 401){ bus_cycle(5, u16_get_lo(i2_split_end), B_WRITE);}
+					else if (m_written_configs == 402){ bus_cycle(6, u16_get_hi(i2_split_end), B_WRITE);}
+					else if (m_written_configs == 403){	bus_cycle(2, i2_scroll_x+=i2_x_inc, B_WRITE);}
+					else if (m_written_configs == 404){	bus_cycle(3, i2_scroll_y+=i2_y_inc, B_WRITE);}
+					else if (m_written_configs == 405){	bus_cycle(0, i2_gfx_mode, B_WRITE);}
+					else if (m_written_configs == 406){	bus_cycle(1, i2_gfx_cfg, B_WRITE);}
+					else if (m_written_configs == 407){	m_written_configs = 450;}
+					else if (m_written_configs == 450) {
+						m_written_configs = 500;
+						m_irq_cycle = false;
+						if (do_debug)
+							printf("(2) scroll_x: %02X, scroll_y: %02X   ", i2_scroll_x, i2_scroll_y);
+					}
+
+					else if (m_written_configs == 500){ bus_cycle(4, 0, B_READ);}
+					else if (m_written_configs == 501){ bus_cycle(5, u16_get_lo(i3_split_end), B_WRITE);}
+					else if (m_written_configs == 502){ bus_cycle(6, u16_get_hi(i3_split_end), B_WRITE);}
+					else if (m_written_configs == 503){	bus_cycle(2, i3_scroll_x+=i3_x_inc, B_WRITE);}
+					else if (m_written_configs == 504){	bus_cycle(3, i3_scroll_y+=i3_y_inc, B_WRITE);}
+					else if (m_written_configs == 505){	bus_cycle(0, i3_gfx_mode, B_WRITE);}
+					else if (m_written_configs == 506){	bus_cycle(1, i3_gfx_cfg, B_WRITE);}
+					else if (m_written_configs == 507){	m_written_configs = 550;}
+					else if (m_written_configs == 550) {
+						m_written_configs = 200;
+						m_irq_cycle = false;
+						if (do_debug)
+							printf("(3) scroll_x: %02X, scroll_y: %02X\n", i3_scroll_x, i3_scroll_y);
+					}
 				}
 			}
 		}
@@ -205,6 +281,21 @@ int i1_scroll_y = 0;
 			if (m_irq_cycle == true)
 				m_irq_count = 1;
 		}
+
+		if (bustest_delay_start != 0) {
+			/* Attempts to count VSYNC pulses to allow bus cycles to be delayed */
+			if (vsync_state_last == 0 && m_core->o_vga_vsync == 1) {
+				bustest_delay_start--;
+				vsync_state_last = 1;
+				putchar('.');
+				fflush(stdout);
+			} else if (vsync_state_last == 1 && m_core->o_vga_vsync == 0) {
+				vsync_state_last = 0;
+				if (bustest_delay_start <= 0) {
+					bustest_delay_start = BUS_CYCLE_DELAY;
+				}
+			}
+		}
 	}
 
 	bool	on_tick(void) {
@@ -215,6 +306,23 @@ int i1_scroll_y = 0;
 };
 
 TESTBENCH	*tb;
+
+const char *helptxt = {
+	"\n"
+	"Diapason Verilog VGA controller core, simulated using verilator.\n"
+	"From NotArtyom 2019\n"
+	"\t-d                    enables debug status output.\n"
+	"\t-h                    displays this help text.\n"
+	"\t-i <file>             loads VRAM with the binary data from the input file.\n"
+	"\t                         I use GIMP to generate the VRAM dumps loaded here. Either create or convert and image to \n"
+	"\t                         320x240 resolution, then apply the Diapason palette file (Image->Mode->Indexed). Next, export\n"
+	"\t                         using .data as the file extension. The last menu prompts for the binary format; Select Planar\n"
+	"\t                         for the first option, Normal for the second option, then export the final binary dump.\n"
+	"\t-g                    fills VRAM with an RGB test pattern.\n"
+	"\t-t \"string\"           loads VRAM with the ASCII characters of the string; Used to test text modes.\n"
+	"\t-x                    fills VRAM with a compiled-in text blob; Used for testing text modes.\n"
+	"\n"
+};
 
 int	main(int argc, char **argv) {
 	Gtk::Main	main_instance(argc, argv);
@@ -229,48 +337,54 @@ int	main(int argc, char **argv) {
 	}
 	int	opt;
 	bool mode_valid = false;
-	while((opt = getopt(argc, argv, "d:hti:g")) != -1) {
+	while((opt = getopt(argc, argv, "dgt:i:xhz")) != -1) {
 		const char DELIMITERS[] = "x, ";
 		switch(opt) {
-		case 'd':
-			if (verbose_flag)
-				fprintf(stderr, "Opening trace file, %s\n", optarg);
-			trace_file = strdup(optarg);
-			break;
-		case 'g':		// GRAPHICS TEST
-			for (int v = 0; v < 240; v++){
-				for (int i = 0; i < 320; i++){
-					vram_mem_array[(v*320)+i] = i;
+			case 'd': {
+				do_debug = true;
+			} break;
+			case 'g': {		// GRAPHICS TEST
+				for (int v = 0; v < 240; v++){
+					for (int i = 0; i < 320; i++){
+						vram_mem_array[(v*320)+i] = i;
+					}
 				}
-			}
-			mode_valid = true;
-			break;
-		case 't':
-			memcpy((char*)(vram_mem_array), optarg, strlen(optarg));
-			memset((char*)vram_mem_array+2400, 0xFF, 2400);
-			mode_valid = true;
-			break;
-		case 'i':
-			std::ifstream image;
-			std::streampos size;
-			image.open(optarg, std::ios::in | std::ios::binary | std::ios::ate);
-			if (!image.is_open()) {
-				printf("Image file not found.\n");
-				exit(1);
-			}
-			size = image.tellg();
-			image.seekg(0, std::ios::beg);
-			image.read(vram_mem_array, size);
-			image.close();
-			mode_valid = true;
-			break;
+				mode_valid = true;
+			} break;
+			case 't': {
+				memcpy((char*)(vram_mem_array), optarg, strlen(optarg));
+				memset((char*)vram_mem_array+2400, 0xFF, 2400);
+				mode_valid = true;
+			} break;
+			case 'i': {
+				std::ifstream image;
+				std::streampos size;
+				image.open(optarg, std::ios::in | std::ios::binary | std::ios::ate);
+				if (!image.is_open()) {
+					printf("Image file not found.\n");
+					exit(1);
+				}
+				size = image.tellg();
+				image.seekg(0, std::ios::beg);
+				image.read(vram_mem_array, size);
+				image.close();
+				mode_valid = true;
+			} break;
+			case 'x': {
+				strcpy((char*)vram_mem_array, vram_preload);
+				for (int i = 0; i < 2400; i++)
+					vram_mem_array[i+2400] = i;
+				mode_valid = true;
+			} break;
+			case 'h': {
+			default:
+				mode_valid = false;
+			} break;
 		}
 	}
 	if (!mode_valid) {
-		strcpy((char*)vram_mem_array, vram_preload);
-		for (int i = 0; i < 2400; i++){
-			vram_mem_array[i+2400] = i;
-		}
+		printf(helptxt);
+		return -1;
 	}
 
 	if ((hres != 1280)||(vres != 1024)) {

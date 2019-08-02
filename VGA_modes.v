@@ -7,23 +7,23 @@
 //----------------------------------
 
 module vga_mode_txt(
-	input				clk_in,
-	input				active,
-	input		[9:0]	raster_x,
-	input		[9:0]	raster_y,
-	input 		[7:0]	mode_config,
-	output reg 	[7:0]	rgb_out,
+	input	wire	clk_in,
+	input	wire 	active,
+	input	wire	[9:0]	raster_x,
+	input	wire	[9:0]	raster_y,
+	input	wire 	[7:0]	mode_config,
+	output 	reg 	[7:0]	rgb_out,
 
-	output reg 	[23:0]	address_out,
-	input 		[7:0]	data_in
+	output 	reg 	[23:0]	address_out,
+	input 	wire	[7:0]	data_in
 );
 
 reg		[7:0]		mem_val;		// Character to be displayed
 reg		[7:0]		attr_val;		// Attribute byte of the character
-reg  	[6:0]		column;
-reg  	[5:0]		row;
-reg  	[2:0]		char_x;
-reg  	[3:0]		char_y;
+reg  	[6:0]		column;			// Current character column the raster is in
+reg  	[5:0]		row;			// Current character row the raster is in
+reg  	[2:0]		char_x;			// Horizontal location of the raster within the character cell grid
+reg  	[3:0]		char_y;			// Vertical location of the raster within the character cell grid
 
 reg		b_state;					// Current mode of the bus. 0 = fetching char data, 1 = fetching attribute
 
@@ -46,16 +46,16 @@ end
 
 always @(posedge clk_in) begin
 	if (active == 0) begin
-			if (b_state) begin
-				address_out = (mode_config[0]) ? 40:80;
-				address_out = (address_out * row) + column;
-				attr_val = data_in;
-				b_state = 0;
-			end else begin
-				address_out = (80 * row) + column + 2400;
-				mem_val = data_in;
-				b_state = 1;
-			end
+		if (b_state) begin
+			address_out = ((80 >> (mode_config[0])) * row) + column;
+			attr_val = data_in;
+			b_state = 0;
+		end else begin
+			address_out = (80 * row) + column + 2400;
+			mem_val = data_in;
+			b_state = 1;
+		end
+
 		if (mode_config[2])
 			if (pixel_out == 1)
 				case(attr_val[3:0])
@@ -96,7 +96,7 @@ always @(posedge clk_in) begin
 					4'hF : rgb_out = 8'b11111111;
 				endcase
 		else
-			rgb_out = (pixel_out == 1) ? attr_val:8'h00;
+			rgb_out = (pixel_out == 1) ? attr_val : 8'h00;
 	end else begin
 		b_state = 1;
 		rgb_out = 8'h00;
@@ -112,48 +112,26 @@ charmem charset_rom(
 	.bit_out(pixel_out)
 );
 
-always @(*) begin
-	if (raster_x == 0)
-		b_state = 1;
-end
-
 endmodule
 
 //----------------------------------
 
 module vga_mode_320x240_bmp(
-	input				clk_in,
-	input				active,
-	input		[9:0]	raster_x,
-	input		[9:0]	raster_y,
-	input 		[7:0]	mode_config,
-	output reg 	[7:0]	rgb_out,
+	input	wire	clk_in,
+	input	wire 	active,
+	input	wire	[9:0]	raster_x,
+	input	wire	[9:0]	raster_y,
+	input 	wire	[7:0]	mode_config,
+	output 	wire 	[7:0]	rgb_out,
 
-	output reg 	[23:0]	address_out,
-	input 		[7:0]	data_in
+	output 	wire	[23:0]	address_out,
+	input 	wire	[7:0]	data_in
 );
 
 reg [7:0]	mem_val;
 reg			b_state;
 
-always @(posedge clk_in) begin
-	if (active == 0) begin
-		if (b_state) begin
-			address_out = ((320 * raster_y[9:1]) + raster_x[9:1]);
-			rgb_out = data_in;
-			b_state = ~b_state;
-		end else begin
-			b_state = 1;
-		end
-	end else begin
-		b_state = 1;
-		rgb_out = 8'h00;
-	end
-end
-
-always @(*) begin
-	if (raster_x == 0)
-		b_state = 1;
-end
+assign address_out = ((320 * raster_y[9:1]) + raster_x[9:1]);
+assign rgb_out = data_in;
 
 endmodule

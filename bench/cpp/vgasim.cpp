@@ -249,7 +249,7 @@ void	VGAWIN::init(void) {
 	set_border_width(0);
 	add(*m_vgasim);
 	show_all();
-	Gtk::Window::set_title(Glib::ustring("VGA Simulator"));
+	Gtk::Window::set_title(Glib::ustring("Diapason"));
 };
 
 VGAWIN::VGAWIN(void) {

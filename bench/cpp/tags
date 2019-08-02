@@ -7,6 +7,7 @@
 !_TAG_PROGRAM_VERSION	0.0.0	/3fdf28bc/
 BITS_PER_COLOR	vgasim.cpp	/^		VGASIM::BITS_PER_COLOR=8;$/;"	m	class:VGASIM	typeref:typename:const int
 BITS_PER_COLOR	vgasim.h	/^				BITS_PER_COLOR;$/;"	m	class:VGASIM	typeref:typename:const int
+BUS_CYCLE_DELAY	main_tb.cpp	/^#define		BUS_CYCLE_DELAY	/;"	d	file:
 B_READ	main_tb.cpp	/^#define		B_READ	/;"	d	file:
 B_WRITE	main_tb.cpp	/^#define		B_WRITE	/;"	d	file:
 CAIROGC	vgasim.h	/^	typedef	Cairo::RefPtr<Cairo::Context>		CAIROGC;$/;"	t	class:VGASIM	typeref:typename:Cairo::RefPtr<Cairo::Context>
@@ -16,6 +17,10 @@ CLOCKS_PER_PIXEL	vgasim.cpp	/^const	int	VGASIM::CLOCKS_PER_PIXEL = 1,$/;"	m	clas
 CLOCKS_PER_PIXEL	vgasim.h	/^	static	const	int	CLOCKS_PER_PIXEL,$/;"	m	class:VGASIM	typeref:typename:const int
 CONTEXT	vgasim.h	/^	typedef	const Cairo::RefPtr<Cairo::Context>	CONTEXT;$/;"	t	class:VGASIM	typeref:typename:const Cairo::RefPtr<Cairo::Context>
 DIMAGE	image.h	/^typedef	IMAGE<double>		DIMAGE, *PDIMAGE;$/;"	t	typeref:typename:IMAGE<double>
+GCFG_LOWRES_X	main_tb.cpp	/^#define 	GCFG_LOWRES_X /;"	d	file:
+GCFG_LOWRES_Y	main_tb.cpp	/^#define 	GCFG_LOWRES_Y	/;"	d	file:
+GFX_BMP	main_tb.cpp	/^#define		GFX_BMP	/;"	d	file:
+GFX_TXT	main_tb.cpp	/^#define		GFX_TXT	/;"	d	file:
 IIMAGE	image.h	/^typedef	IMAGE<int>		IIMAGE, *PIIMAGE;$/;"	t	typeref:typename:IMAGE<int>
 IMAGE	image.cpp	/^template<class PIXEL> IMAGE<PIXEL>::IMAGE(IMAGE<PIXEL> *img) {$/;"	f	class:IMAGE
 IMAGE	image.cpp	/^template<class PIXEL> IMAGE<PIXEL>::IMAGE(int h, int w) {$/;"	f	class:IMAGE
@@ -52,11 +57,13 @@ VIDEOMODE_H	videomode.h	/^#define	VIDEOMODE_H$/;"	d
 VVAR	main_tb.cpp	/^#define	VVAR(/;"	d	file:
 allocbuf	image.cpp	/^template<class PIXEL> void IMAGE<PIXEL>::allocbuf(int h, int w) {$/;"	f	class:IMAGE	typeref:typename:void
 bus_cycle	main_tb.cpp	/^#define 	bus_cycle(/;"	d	file:
+bustest_delay_start	main_tb.cpp	/^int			bustest_delay_start = BUS_CYCLE_DELAY;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
 close	main_tb.cpp	/^	void	close(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 closetrace	testb.h	/^	virtual	void	closetrace(void) {$/;"	f	class:TESTB	typeref:typename:void
 cols	image.h	/^	int	cols(void) const { return m_height; }$/;"	f	class:IMAGE	typeref:typename:int
 copy	image.cpp	/^template<class PIXEL> IMAGE<PIXEL> *IMAGE<PIXEL>::copy(void) {$/;"	f	class:IMAGE	typeref:typename:IMAGE<PIXEL> *
 crop	image.cpp	/^template<class PIXEL> IMAGE<PIXEL> *IMAGE<PIXEL>::crop(int y, int x,$/;"	f	class:IMAGE	typeref:typename:IMAGE<PIXEL> *
+do_debug	main_tb.cpp	/^bool do_debug = false;$/;"	v	typeref:typename:bool
 err	videomode.h	/^	int	err(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
 eval	testb.h	/^	virtual	void	eval(void) {$/;"	f	class:TESTB	typeref:typename:void
 flipx	image.cpp	/^template<class PIXEL> void IMAGE<PIXEL>::flipx(void) {$/;"	f	class:IMAGE	typeref:typename:void
@@ -70,16 +77,41 @@ height	image.h	/^	int	height(void) const { return m_height; }$/;"	f	class:IMAGE	
 height	vgasim.h	/^	int	height(void) {$/;"	f	class:VGASIM	typeref:typename:int
 height	vgasim.h	/^	int	height(void) {$/;"	f	class:VGAWIN	typeref:typename:int
 height	videomode.h	/^	int	height(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+helptxt	main_tb.cpp	/^const char *helptxt = {$/;"	v	typeref:typename:const char *
 hporch	vgasim.h	/^	int	hporch(void) {$/;"	f	class:VGASIM	typeref:typename:int
 hporch	vgasim.h	/^	int	hporch(void) {$/;"	f	class:VGAWIN	typeref:typename:int
 hporch	videomode.h	/^	int	hporch(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
 hsync	vgasim.h	/^	int	hsync(void) {$/;"	f	class:VGASIM	typeref:typename:int
 hsync	vgasim.h	/^	int	hsync(void) {$/;"	f	class:VGAWIN	typeref:typename:int
 hsync	videomode.h	/^	int	hsync(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
-i0_scroll_x	main_tb.cpp	/^int i0_scroll_x = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
-i0_scroll_y	main_tb.cpp	/^int i0_scroll_y = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
-i1_scroll_x	main_tb.cpp	/^int i1_scroll_x = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
-i1_scroll_y	main_tb.cpp	/^int i1_scroll_y = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
+i0_gfx_cfg	main_tb.cpp	/^uint8_t 	i0_gfx_cfg  = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i0_gfx_mode	main_tb.cpp	/^uint8_t		i0_gfx_mode = GFX_BMP;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i0_scroll_x	main_tb.cpp	/^uint8_t		i0_scroll_x = 0,		i0_x_inc = 1;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i0_scroll_y	main_tb.cpp	/^uint8_t		i0_scroll_y = 0,		i0_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i0_split_end	main_tb.cpp	/^uint16_t	i0_split_end = 119;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
+i0_x_inc	main_tb.cpp	/^uint8_t		i0_scroll_x = 0,		i0_x_inc = 1;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i0_y_inc	main_tb.cpp	/^uint8_t		i0_scroll_y = 0,		i0_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_gfx_cfg	main_tb.cpp	/^uint8_t 	i1_gfx_cfg  = GCFG_LOWRES_X;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_gfx_mode	main_tb.cpp	/^uint8_t		i1_gfx_mode = GFX_TXT;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_scroll_x	main_tb.cpp	/^uint8_t		i1_scroll_x = 0,		i1_x_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_scroll_y	main_tb.cpp	/^uint8_t		i1_scroll_y = 0,		i1_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_split_end	main_tb.cpp	/^uint16_t	i1_split_end = 239;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
+i1_x_inc	main_tb.cpp	/^uint8_t		i1_scroll_x = 0,		i1_x_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_y_inc	main_tb.cpp	/^uint8_t		i1_scroll_y = 0,		i1_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i2_gfx_cfg	main_tb.cpp	/^uint8_t 	i2_gfx_cfg  = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i2_gfx_mode	main_tb.cpp	/^uint8_t		i2_gfx_mode = GFX_BMP;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i2_scroll_x	main_tb.cpp	/^uint8_t		i2_scroll_x = 0,		i2_x_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i2_scroll_y	main_tb.cpp	/^uint8_t		i2_scroll_y = 0,		i2_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i2_split_end	main_tb.cpp	/^uint16_t	i2_split_end = 359;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
+i2_x_inc	main_tb.cpp	/^uint8_t		i2_scroll_x = 0,		i2_x_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i2_y_inc	main_tb.cpp	/^uint8_t		i2_scroll_y = 0,		i2_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i3_gfx_cfg	main_tb.cpp	/^uint8_t 	i3_gfx_cfg  = GCFG_LOWRES_X | GCFG_LOWRES_Y;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i3_gfx_mode	main_tb.cpp	/^uint8_t		i3_gfx_mode = GFX_TXT;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i3_scroll_x	main_tb.cpp	/^uint8_t		i3_scroll_x = 0,		i3_x_inc = 2;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i3_scroll_y	main_tb.cpp	/^uint8_t		i3_scroll_y = 0,		i3_y_inc = 1;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i3_split_end	main_tb.cpp	/^uint16_t	i3_split_end = 479;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
+i3_x_inc	main_tb.cpp	/^uint8_t		i3_scroll_x = 0,		i3_x_inc = 2;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i3_y_inc	main_tb.cpp	/^uint8_t		i3_scroll_y = 0,		i3_y_inc = 1;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 init	main_tb.cpp	/^	void	init(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 init	vgasim.cpp	/^void	VGAWIN::init(void) {$/;"	f	class:VGAWIN	typeref:typename:void
 initialize	vgasim.h	/^	void	initialize(void) {$/;"	f	class:VGASIM	typeref:typename:void
@@ -135,8 +167,6 @@ opentrace	testb.h	/^	virtual	void	opentrace(const char *vcdname) {$/;"	f	class:T
 operator ()	vgasim.cpp	/^void	VGASIM::operator()(const int vsync, const int hsync, const int r, const int g, const int b)/;"	f	class:VGASIM	typeref:typename:void
 operator ()	vgasim.h	/^	void	operator()(const int vsync, const int hsync, const int r, const int g, const int b) {$/;"	f	class:VGAWIN	typeref:typename:void
 pixels_per_frame	videomode.h	/^	int	pixels_per_frame(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
-raster_irq_0	main_tb.cpp	/^int raster_irq_0 = 0x60;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
-raster_irq_1	main_tb.cpp	/^int raster_irq_1 = 0x00;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
 raw_height	vgasim.h	/^	int	raw_height(void) {$/;"	f	class:VGASIM	typeref:typename:int
 raw_height	vgasim.h	/^	int	raw_height(void) {$/;"	f	class:VGAWIN	typeref:typename:int
 raw_height	videomode.h	/^	int	raw_height(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
@@ -159,6 +189,8 @@ tick	main_tb.cpp	/^	void 	tick(void) {$/;"	f	class:TESTBENCH	typeref:typename:vo
 tick	testb.h	/^	virtual	void	tick(void) {$/;"	f	class:TESTB	typeref:typename:void
 tickcount	testb.h	/^	unsigned long	tickcount(void) {$/;"	f	class:TESTB	typeref:typename:unsigned long
 trace	main_tb.cpp	/^	void	trace(const char *vcd_trace_file_name) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
+u16_get_hi	main_tb.cpp	/^#define 	u16_get_hi(/;"	d	file:
+u16_get_lo	main_tb.cpp	/^#define 	u16_get_lo(/;"	d	file:
 vback_porch	videomode.h	/^	int	vback_porch(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
 vporch	vgasim.h	/^	int	vporch(void) {$/;"	f	class:VGASIM	typeref:typename:int
 vporch	vgasim.h	/^	int	vporch(void) {$/;"	f	class:VGAWIN	typeref:typename:int
@@ -168,6 +200,7 @@ vram_preload	main_tb.cpp	/^const char *vram_preload = {$/;"	v	typeref:typename:c
 vsync	vgasim.h	/^	int	vsync(void) {$/;"	f	class:VGASIM	typeref:typename:int
 vsync	vgasim.h	/^	int	vsync(void) {$/;"	f	class:VGAWIN	typeref:typename:int
 vsync	videomode.h	/^	int	vsync(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
+vsync_state_last	main_tb.cpp	/^char		vsync_state_last = 0;$/;"	m	class:TESTBENCH	typeref:typename:char	file:
 width	image.h	/^	int	width(void) const { return m_width; }$/;"	f	class:IMAGE	typeref:typename:int
 width	vgasim.h	/^	int	width(void) {$/;"	f	class:VGASIM	typeref:typename:int
 width	vgasim.h	/^	int	width(void) {$/;"	f	class:VGAWIN	typeref:typename:int

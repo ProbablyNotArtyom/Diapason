@@ -4,7 +4,7 @@
 //
 // Project:	vgasim, a Verilator based VGA simulator demonstration
 //
-// Purpose:	
+// Purpose:
 //
 // Creator:	Dan Gisselquist, Ph.D.
 //		Gisselquist Technology, LLC
@@ -227,4 +227,3 @@ public:
 };
 
 #endif
-
