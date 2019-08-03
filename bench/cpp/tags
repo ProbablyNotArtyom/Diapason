@@ -57,6 +57,7 @@ VIDEOMODE_H	videomode.h	/^#define	VIDEOMODE_H$/;"	d
 VVAR	main_tb.cpp	/^#define	VVAR(/;"	d	file:
 allocbuf	image.cpp	/^template<class PIXEL> void IMAGE<PIXEL>::allocbuf(int h, int w) {$/;"	f	class:IMAGE	typeref:typename:void
 bus_cycle	main_tb.cpp	/^#define 	bus_cycle(/;"	d	file:
+bus_test_mode	main_tb.cpp	/^int bus_test_mode = 0;$/;"	v	typeref:typename:int
 bustest_delay_start	main_tb.cpp	/^int			bustest_delay_start = BUS_CYCLE_DELAY;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
 close	main_tb.cpp	/^	void	close(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 closetrace	testb.h	/^	virtual	void	closetrace(void) {$/;"	f	class:TESTB	typeref:typename:void

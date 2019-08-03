@@ -28,18 +28,15 @@ assign	active = ((raster_y < vfp) && (raster_x < hfp)) ? 0:1;
 assign	hsync_out = (raster_x > hfp && raster_x < hbp) ? 0:1;
 assign	vsync_out = (raster_y > vfp && raster_y < vbp) ? 0:1;
 
-
-always @(posedge clk or posedge reset)
-begin
-	if (reset)
-	begin
+/* Generate VGA timings and blanking intervals */
+always @(posedge clk or posedge reset) begin
+	if (reset) begin							// Make sure we start counting from 0
 		raster_x <= 0;
 		raster_y <= 0;
 	end else begin
 	if (raster_x < hpixels - 1)
 		raster_x <= raster_x + 1;
-	else
-	begin
+	else begin
 		raster_x <= 0;
 		if (raster_y < vlines - 1)
 			raster_y <= raster_y + 1;

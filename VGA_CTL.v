@@ -1,53 +1,52 @@
-// TODO:
-// Scroll register
 
 	`default_nettype wire
 
-	//`define ROM_CHARSET_FILE "VGA8_ROM.list"
 	`define ROM_CHARSET_FILE "VGA_PS2.list"
 
-//==================================
+//==============TOPLEVEL==============
 
 module VGA_CTL(
-	input		clk_main,	// 50MHz base clock
-	input		reset_in,	// System reset
-	output		clk_system,	// Sysclk
+	input	wire			clk_main,		// 50MHz base clock
+	input	wire			reset_in,		// System reset
+	output	wire			clk_system,		// Sysclk
 
-	input		cs_vgamem,
+	input	wire 			cs_vgamem,
 
 	output	reg 	[23:0]	vram_a_bus,
 	input 	wire	[7:0]	vram_d_bus,
 
 	input 	wire	[7:0]	cpu_a_bus,
 	input 	wire	[7:0]	cpu_d_bus,
-	input 					cpu_rw,				// Read high, write low
-	input 					vga_select,
-	output reg 				cpu_ack,			// Acknowledge & grant the CPU transfer request
-	output reg 				vga_interrupt,
+	input 	wire			cpu_rw,			// Read high, write low
+	input 	wire			vga_select,
+	output 	reg 			cpu_ack,		// Acknowledge & grant the CPU transfer request
+	output 	reg 			vga_interrupt,
 
 
-	output	vga_blank,
-	output	vga_hsync,
-	output	vga_vsync,
-	output 	reg [7:0]		vga_rgb_out
+	output	wire 			vga_blank,
+	output	wire 			vga_hsync,
+	output	wire 			vga_vsync,
+	output 	reg 	[7:0]	vga_rgb_out
 );
 
 //----------Clock Dividers----------
 
+/* Divide the bus clock into the pixel clock */
 clk_div_x2 clkgen_stage_1(clk_main, reset_in, clk_system);
 
-wire 	[23:0] int_bmp_a_bus;
-wire 	[23:0] int_txt_a_bus;
-wire 			vga_mode_bmp, vga_mode_txt;
+/* Wires for connecting multiplexed internal busses */
+wire 	[23:0] 	int_bmp_a_bus;
+wire 	[23:0] 	int_txt_a_bus;
 wire 	[7:0]	bmp_rgb_out;
 wire 	[7:0]	txt_rgb_out;
 
 always @(*) begin
-	/* Only make the busses active if the raster is visible + the Displan Enable bit is set */
+	/* Only make the busses active if the raster is visible + the Display Enable bit is set */
 	if ((px_address_x >= reg_scroll_x && px_address_y >= reg_scroll_y) && (reg_gfx_mode_select[1] == 0)) begin
 		vram_a_bus = (reg_gfx_mode_select[0] == 1)? int_bmp_a_bus : int_txt_a_bus;
 		vga_rgb_out = (reg_gfx_mode_select[0] == 1)? bmp_rgb_out : txt_rgb_out;
 		mod_raster_active = raster_active;
+	/* Otherwise, we dont need to be using the bus, so tristate it so the host can access VRAM */
 	end else begin
 		vram_a_bus = 24'bz;
 		vga_rgb_out = 8'h00;
@@ -56,11 +55,12 @@ always @(*) begin
 end
 
 //-----------Register Map-----------
+// These registers are acessed using the host bus interface
 
 reg [7:0] reg_gfx_mode_select;		// 0	[1](1 = display disable, 0 = enable) [0](1 = graphics, 0 = text)
 reg [7:0] reg_gfx_mode_config;		// 1
-reg [7:0] reg_scroll_x;			// 2
-reg [7:0] reg_scroll_y;			// 3
+reg [7:0] reg_scroll_x;				// 2
+reg [7:0] reg_scroll_y;				// 3
 reg [7:0] reg_misc_0;				// 4	[7](1 = vblank irq enable) [6](1 = raster irq enable) [5](1 = irq triggered)
 reg [7:0] reg_raster_lo;			// 5	[7:0](raster irq low)
 reg [7:0] reg_raster_hi;			// 6	[1:0](raster irq high)
@@ -68,6 +68,7 @@ reg [7:0] reg_raster_hi;			// 6	[1:0](raster irq high)
 reg [7:0] out_buff;
 always @(posedge clk_main or posedge reset_in) begin
 	if (reset_in == 1) begin
+		/* Set registers to a default state after reset */
 		reg_gfx_mode_select <= 8'h00;
 		reg_gfx_mode_config <= 8'h00;
 		reg_scroll_x <= 8'h00;
@@ -75,12 +76,15 @@ always @(posedge clk_main or posedge reset_in) begin
 		reg_misc_0 <= 8'h00;
 		reg_raster_lo <= 8'h00;
 		reg_raster_hi <= 8'h00;
-		cpu_ack <= 1;
 
+		/* Make sure were not making spurious interrupts */
+		cpu_ack <= 1;
 		vga_interrupt <= 1'b1;
 	end else if (vga_select == 0) begin
+		/* Host has initiated a bus transfer of some sort, acknowledge it immediately */
 		cpu_ack <= 0;
-		if (cpu_rw == 1) begin				// CPU read
+		/* Host is READING from us */
+		if (cpu_rw == 1) begin
 			case (cpu_a_bus)
 				8'h00: 		out_buff <= reg_gfx_mode_select;
 				8'h01: 		out_buff <= reg_gfx_mode_config;
@@ -94,7 +98,8 @@ always @(posedge clk_main or posedge reset_in) begin
 				8'h06: 		out_buff <= reg_raster_hi;
 				default: 	out_buff <= 0;
 			endcase
-		end else begin						// CPU write
+		/* Host is WRITING to us */
+		end else begin
 			case (cpu_a_bus)
 				8'h00: 		reg_gfx_mode_select <= cpu_d_bus;
 				8'h01: 		reg_gfx_mode_config <= cpu_d_bus;
@@ -106,6 +111,7 @@ always @(posedge clk_main or posedge reset_in) begin
 				default:	begin end
 			endcase
 		end
+	/* Once the host de-asserts our chip select, we de-asserts ACK */
 	end else if (cpu_ack == 0 && vga_select == 1)
 		cpu_ack <= 1;
 
@@ -163,6 +169,7 @@ vga_mode_320x240_bmp vga_bmp_gen(
 
 //---------Video Modifiers----------
 
+/* Apply the scroll registers to the current pixel coordinates */
 assign mod_px_address_x = (px_address_x >= reg_scroll_x)? px_address_x - reg_scroll_x : 0;
 assign mod_px_address_y = (px_address_y >= reg_scroll_y)? px_address_y - reg_scroll_y : 0;
 

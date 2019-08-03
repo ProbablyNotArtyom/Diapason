@@ -58,6 +58,7 @@
 #define	VVAR(A)	v__DOT_ ## A
 #endif
 
+int bus_test_mode = 0;
 bool do_debug = false;
 const char *vram_preload = {
 		"The 601 is the first implementation of the PowerPC family of RISC microprocessors. The 601 implements the 32-bit portion of the PowerPC architecture, which provides 32-bit effective addresses, integer data types of 8, 16, and 32 bits, and floating-point data types of 32 and 64 bits. For 64-bit PowerPC implementations, the PowerPC architecture provides 64-bit integer data types, 64-bit addressing, and other features required to complete the 64-bit architecture. The 601 is a superscalar processor capable of issuing and retiring three instructions per clock, one to each of three execution units. Instructions can complete out of order for increased performance; however, the 601 makes execution appear sequential. The 601 integrates three execution units—an integer unit (IU), a branch processing unit (BPU), and a floating-point unit (FPU). The ability to execute three instructions in parallel and the use of simple instructions with rapid execution times yield high efficiency and throughput for 601-based systems. Most integer instructions execute in one clock cycle. The FPU is pipelined so a single-precision multiply-add instruction can be issued every clock cycle. The 601 provides an on-chip, 32-Kbyte, eight-way set-associative, physically addressed, unified instruction and data cache and an on-chip memory management unit (MMU). The MMU contains a 256-entry, two-way set-associative, unified translation lookaside buffer (UTLB) and provides support for demand-paged virtual memory address translation and variable-sized block translation. Both the UTLB and the cache use least recently used (LRU) replacement algorithms. The 601 has a 64-bit data bus and a 32-bit address bus. The 601 interface protocol allows multiple masters to compete for system resources through a central external arbiter. Additionally, on-chip snooping logic maintains cache coherency in multiprocessor applications. The 601 supports single-beat and burst data transfers for memory accesses; it also supports both memory-mapped I/O and direct-store addressing. The 601 uses an advanced CMOS (complementary metal-oxide semiconductor) process technology and maintains full interface compatibility with TTL devices. The 601v is functionally equivalent to the 601, but operates with reduced internal voltages and with reduced power dissipation. "
@@ -311,6 +312,10 @@ const char *helptxt = {
 	"\n"
 	"Diapason Verilog VGA controller core, simulated using verilator.\n"
 	"From NotArtyom 2019\n"
+	"\t-b <val>              Sets the bus cycle testing mode:\n"
+	"\t                         00 : 320x240x8 bitmap mode, Fullscreen\n"
+	"\t                         01 : 80x30 textmode, Fullscreen\n"
+	"\t                         02 : 4-way raster-split\n"
 	"\t-d                    enables debug status output.\n"
 	"\t-h                    displays this help text.\n"
 	"\t-i <file>             loads VRAM with the binary data from the input file.\n"
@@ -337,7 +342,7 @@ int	main(int argc, char **argv) {
 	}
 	int	opt;
 	bool mode_valid = false;
-	while((opt = getopt(argc, argv, "dgt:i:xhz")) != -1) {
+	while((opt = getopt(argc, argv, "dgt:i:b:xhz")) != -1) {
 		const char DELIMITERS[] = "x, ";
 		switch(opt) {
 			case 'd': {
@@ -374,6 +379,10 @@ int	main(int argc, char **argv) {
 				strcpy((char*)vram_mem_array, vram_preload);
 				for (int i = 0; i < 2400; i++)
 					vram_mem_array[i+2400] = i;
+				mode_valid = true;
+			} break;
+			case 'b': {
+
 				mode_valid = true;
 			} break;
 			case 'h': {

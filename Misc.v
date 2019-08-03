@@ -1,5 +1,5 @@
 
-
+/* This things sole purpose is to turn the bus clock into the pixel clock */
 module clk_div_x2(
 	input		clk_in,
 	input		reset_in,

@@ -27,24 +27,17 @@ reg  	[3:0]		char_y;			// Vertical location of the raster within the character c
 
 reg		b_state;					// Current mode of the bus. 0 = fetching char data, 1 = fetching attribute
 
+
+/* Turn the raw pixel coordinates into the current character cell, and the coordinate of the raster in the current cell */
 always @(posedge clk_in) begin
-	if (mode_config[0]) begin
-		column[5:0] = raster_x[9:4];
-		char_x = raster_x[3:1];
-	end else begin
-		column[6:0] = raster_x[9:3];
-		char_x = raster_x[2:0];
-	end
-	if (mode_config[1]) begin
-		row[4:0] = raster_y[9:5];
-		char_y = raster_y[4:1];
-	end else begin
-		row[5:0] = raster_y[9:4];
-		char_y = raster_y[3:0];
-	end
+	column 	= (mode_config[0])? raster_x[9:4] : raster_x[9:3];
+	row 	= (mode_config[1])? raster_y[9:5] : raster_y[9:4];
+	char_x 	= (mode_config[0])? raster_x[3:1] : raster_x[2:0];
+	char_y 	= (mode_config[1])? raster_y[4:1] : raster_y[3:0];
 end
 
 always @(posedge clk_in) begin
+	/* Read in the character value and the attribute value on alternating cycles */
 	if (active == 0) begin
 		if (b_state) begin
 			address_out = ((80 >> (mode_config[0])) * row) + column;
@@ -56,8 +49,11 @@ always @(posedge clk_in) begin
 			b_state = 1;
 		end
 
+		/* IBM VGA compatability mode */
+		/* Colours are hardcoded here */
 		if (mode_config[2])
 			if (pixel_out == 1)
+				/* Foreground colour */
 				case(attr_val[3:0])
 					4'h0 : rgb_out = 8'b00000000;
 					4'h1 : rgb_out = 8'b00000011;
@@ -77,6 +73,7 @@ always @(posedge clk_in) begin
 					4'hF : rgb_out = 8'b11111111;
 				endcase
 			else
+				/* Background colour */
 				case(attr_val[7:4])
 					4'h0 : rgb_out = 8'b00000000;
 					4'h1 : rgb_out = 8'b00000011;
@@ -96,13 +93,16 @@ always @(posedge clk_in) begin
 					4'hF : rgb_out = 8'b11111111;
 				endcase
 		else
+			/* Add the colour to the black and white character tiles by masking using the pixel value */
 			rgb_out = (pixel_out == 1) ? attr_val : 8'h00;
+	/* Make sure the bus is in the right state at the start of the visible line */
 	end else begin
 		b_state = 1;
 		rgb_out = 8'h00;
 	end
 end
 
+/* Set up a character ROM */
 wire pixel_out;
 charmem charset_rom(
 	.ascii_in(mem_val),
@@ -131,6 +131,9 @@ module vga_mode_320x240_bmp(
 reg [7:0]	mem_val;
 reg			b_state;
 
+/* Currently, this makes the FPGA access video memory pretty much constantly throughout the visible screen */
+/* I have enough bandwidth here to only access every other cycle, which would be a reasonable performance boost */
+/* Currently simple, asynchronous, and seemingly functional; avoid touching for now */
 assign address_out = ((320 * raster_y[9:1]) + raster_x[9:1]);
 assign rgb_out = data_in;
 
