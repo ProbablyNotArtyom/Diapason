@@ -27,6 +27,7 @@ demo:
 	$(SUBMAKE) bench/rtl/
 
 bench: demo
+	cp -f $(PWD)/test.data bench/cpp/ 
 	$(SUBMAKE) bench/cpp/
 
 rtl: test

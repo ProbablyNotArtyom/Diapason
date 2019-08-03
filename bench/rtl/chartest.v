@@ -9,7 +9,9 @@ o_vga_vsync, o_vga_hsync, o_vga_red, o_vga_grn, o_vga_blu, o_interrupt,
 
 o_vram_addr, i_vram_data,
 
-o_cpu_a_bus, io_cpu_d_bus, o_cpu_rw, o_vga_select, i_vga_interrupt, o_cpu_ack
+o_cpu_a_bus, io_cpu_d_bus, o_cpu_rw, o_vga_select, i_vga_interrupt, o_cpu_ack,
+
+o_vga_blanking
 );
 
 	parameter	BW=32,
@@ -36,7 +38,8 @@ o_cpu_a_bus, io_cpu_d_bus, o_cpu_rw, o_vga_select, i_vga_interrupt, o_cpu_ack
 	assign	o_vga_grn = {vga_rgb[5:3], 5'b0};
 	assign	o_vga_blu = {vga_rgb[7:6], 6'b0};
 
-	wire sysclk, o_vga_blanking;
+	wire sysclk;
+	output 	wire 			o_vga_blanking;
 
 	input 	wire 			o_cpu_rw, o_vga_select;
 	output 	wire  			i_vga_interrupt, o_cpu_ack;

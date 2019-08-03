@@ -97,7 +97,11 @@ simcheck: $(OBJDIR)/simcheck.o $(OBJDIR)/vgasim.o $(OBJDIR)/vgasource.o
 
 MAINOBJS := $(OBJDIR)/main_tb.o
 main_tb: $(MAINOBJS) $(SIMOBJECTS) $(VOBJS) $(VOBJDR)/Vchartest__ALL.a
-	$(CXX) $(GFXFLAGS) $^ $(VOBJDR)/Vchartest__ALL.a $(GFXLIBS) -o $@
+	make builtin_bdata
+	$(CXX) $(GFXFLAGS) $^ $(OBJDIR)/bitmap.o $(VOBJDR)/Vchartest__ALL.a $(GFXLIBS) -o $@
+
+builtin_bdata:
+	objcopy -Ibinary -O elf64-x86-64 -Bi386:x86-64 --rename-section .data=.rodata ./test.data $(OBJDIR)/bitmap.o
 
 .PHONY: clean
 clean:

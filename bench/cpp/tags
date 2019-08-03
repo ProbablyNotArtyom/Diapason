@@ -56,15 +56,16 @@ VIDEOMODE	videomode.h	/^class	VIDEOMODE {$/;"	c
 VIDEOMODE_H	videomode.h	/^#define	VIDEOMODE_H$/;"	d
 VVAR	main_tb.cpp	/^#define	VVAR(/;"	d	file:
 allocbuf	image.cpp	/^template<class PIXEL> void IMAGE<PIXEL>::allocbuf(int h, int w) {$/;"	f	class:IMAGE	typeref:typename:void
+blank_state_last	main_tb.cpp	/^char		blank_state_last = 0;$/;"	m	class:TESTBENCH	typeref:typename:char	file:
 bus_cycle	main_tb.cpp	/^#define 	bus_cycle(/;"	d	file:
-bus_test_mode	main_tb.cpp	/^int bus_test_mode = 0;$/;"	v	typeref:typename:int
+bus_test_mode	main_tb.cpp	/^int 		bus_test_mode = 0;$/;"	v	typeref:typename:int
 bustest_delay_start	main_tb.cpp	/^int			bustest_delay_start = BUS_CYCLE_DELAY;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
 close	main_tb.cpp	/^	void	close(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 closetrace	testb.h	/^	virtual	void	closetrace(void) {$/;"	f	class:TESTB	typeref:typename:void
 cols	image.h	/^	int	cols(void) const { return m_height; }$/;"	f	class:IMAGE	typeref:typename:int
 copy	image.cpp	/^template<class PIXEL> IMAGE<PIXEL> *IMAGE<PIXEL>::copy(void) {$/;"	f	class:IMAGE	typeref:typename:IMAGE<PIXEL> *
 crop	image.cpp	/^template<class PIXEL> IMAGE<PIXEL> *IMAGE<PIXEL>::crop(int y, int x,$/;"	f	class:IMAGE	typeref:typename:IMAGE<PIXEL> *
-do_debug	main_tb.cpp	/^bool do_debug = false;$/;"	v	typeref:typename:bool
+do_debug	main_tb.cpp	/^bool 		do_debug = false;$/;"	v	typeref:typename:bool
 err	videomode.h	/^	int	err(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
 eval	testb.h	/^	virtual	void	eval(void) {$/;"	f	class:TESTB	typeref:typename:void
 flipx	image.cpp	/^template<class PIXEL> void IMAGE<PIXEL>::flipx(void) {$/;"	f	class:IMAGE	typeref:typename:void
@@ -86,35 +87,36 @@ hsync	vgasim.h	/^	int	hsync(void) {$/;"	f	class:VGASIM	typeref:typename:int
 hsync	vgasim.h	/^	int	hsync(void) {$/;"	f	class:VGAWIN	typeref:typename:int
 hsync	videomode.h	/^	int	hsync(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
 i0_gfx_cfg	main_tb.cpp	/^uint8_t 	i0_gfx_cfg  = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i0_gfx_mode	main_tb.cpp	/^uint8_t		i0_gfx_mode = GFX_BMP;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i0_scroll_x	main_tb.cpp	/^uint8_t		i0_scroll_x = 0,		i0_x_inc = 1;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i0_gfx_mode	main_tb.cpp	/^uint8_t		i0_gfx_mode = GFX_TXT;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i0_scroll_x	main_tb.cpp	/^uint8_t		i0_scroll_x = 0,		i0_x_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i0_scroll_y	main_tb.cpp	/^uint8_t		i0_scroll_y = 0,		i0_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i0_split_end	main_tb.cpp	/^uint16_t	i0_split_end = 119;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
-i0_x_inc	main_tb.cpp	/^uint8_t		i0_scroll_x = 0,		i0_x_inc = 1;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i0_split_end	main_tb.cpp	/^uint16_t	i0_split_end = 120;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
+i0_x_inc	main_tb.cpp	/^uint8_t		i0_scroll_x = 0,		i0_x_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i0_y_inc	main_tb.cpp	/^uint8_t		i0_scroll_y = 0,		i0_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i1_gfx_cfg	main_tb.cpp	/^uint8_t 	i1_gfx_cfg  = GCFG_LOWRES_X;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i1_gfx_mode	main_tb.cpp	/^uint8_t		i1_gfx_mode = GFX_TXT;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i1_scroll_x	main_tb.cpp	/^uint8_t		i1_scroll_x = 0,		i1_x_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i1_scroll_y	main_tb.cpp	/^uint8_t		i1_scroll_y = 0,		i1_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i1_split_end	main_tb.cpp	/^uint16_t	i1_split_end = 239;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
-i1_x_inc	main_tb.cpp	/^uint8_t		i1_scroll_x = 0,		i1_x_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i1_y_inc	main_tb.cpp	/^uint8_t		i1_scroll_y = 0,		i1_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_gfx_mode	main_tb.cpp	/^uint8_t		i1_gfx_mode = GFX_BMP;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_scroll_x	main_tb.cpp	/^uint8_t		i1_scroll_x = 0,		i1_x_inc = 1;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_scroll_y	main_tb.cpp	/^uint8_t		i1_scroll_y = 0,		i1_y_inc = 3;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_split_end	main_tb.cpp	/^uint16_t	i1_split_end = 240;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
+i1_x_inc	main_tb.cpp	/^uint8_t		i1_scroll_x = 0,		i1_x_inc = 1;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i1_y_inc	main_tb.cpp	/^uint8_t		i1_scroll_y = 0,		i1_y_inc = 3;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i2_gfx_cfg	main_tb.cpp	/^uint8_t 	i2_gfx_cfg  = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i2_gfx_mode	main_tb.cpp	/^uint8_t		i2_gfx_mode = GFX_BMP;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i2_gfx_mode	main_tb.cpp	/^uint8_t		i2_gfx_mode = GFX_TXT;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i2_scroll_x	main_tb.cpp	/^uint8_t		i2_scroll_x = 0,		i2_x_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i2_scroll_y	main_tb.cpp	/^uint8_t		i2_scroll_y = 0,		i2_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i2_split_end	main_tb.cpp	/^uint16_t	i2_split_end = 359;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
+i2_split_end	main_tb.cpp	/^uint16_t	i2_split_end = 360;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
 i2_x_inc	main_tb.cpp	/^uint8_t		i2_scroll_x = 0,		i2_x_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i2_y_inc	main_tb.cpp	/^uint8_t		i2_scroll_y = 0,		i2_y_inc = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i3_gfx_cfg	main_tb.cpp	/^uint8_t 	i3_gfx_cfg  = GCFG_LOWRES_X | GCFG_LOWRES_Y;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i3_gfx_mode	main_tb.cpp	/^uint8_t		i3_gfx_mode = GFX_TXT;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
+i3_gfx_mode	main_tb.cpp	/^uint8_t		i3_gfx_mode = GFX_BMP;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i3_scroll_x	main_tb.cpp	/^uint8_t		i3_scroll_x = 0,		i3_x_inc = 2;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i3_scroll_y	main_tb.cpp	/^uint8_t		i3_scroll_y = 0,		i3_y_inc = 1;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
-i3_split_end	main_tb.cpp	/^uint16_t	i3_split_end = 479;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
+i3_split_end	main_tb.cpp	/^uint16_t	i3_split_end = 482;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
 i3_x_inc	main_tb.cpp	/^uint8_t		i3_scroll_x = 0,		i3_x_inc = 2;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 i3_y_inc	main_tb.cpp	/^uint8_t		i3_scroll_y = 0,		i3_y_inc = 1;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 init	main_tb.cpp	/^	void	init(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 init	vgasim.cpp	/^void	VGAWIN::init(void) {$/;"	f	class:VGAWIN	typeref:typename:void
+init_bus_testbench	main_tb.cpp	/^void init_bus_testbench(int benchNum) {$/;"	f	typeref:typename:void
 initialize	vgasim.h	/^	void	initialize(void) {$/;"	f	class:VGASIM	typeref:typename:void
 m_buf	image.h	/^	unsigned char	*m_buf;$/;"	m	class:IMAGE	typeref:typename:unsigned char *
 m_core	testb.h	/^	VA		*m_core;$/;"	m	class:TESTB	typeref:typename:VA *
@@ -156,6 +158,7 @@ m_width	image.h	/^	int	m_height, m_width;$/;"	m	class:IMAGE	typeref:typename:int
 m_written_configs	main_tb.cpp	/^	int			m_written_configs = 0;$/;"	m	class:TESTBENCH	typeref:typename:int	file:
 main	main_tb.cpp	/^int	main(int argc, char **argv) {$/;"	f	typeref:typename:int
 main_time	main_tb.cpp	/^vluint64_t main_time = 0;	\/\/ Current simulation time (64-bit unsigned)$/;"	v	typeref:typename:vluint64_t
+next_raster	main_tb.cpp	/^uint16_t 	next_raster = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
 on_configure_event	vgasim.h	/^	virtual	bool	on_configure_event(GdkEventConfigure *ev) {$/;"	f	class:VGASIM	typeref:typename:bool
 on_draw	vgasim.cpp	/^bool	VGASIM::on_draw(CONTEXT &gc) {$/;"	f	class:VGASIM	typeref:typename:bool
 on_hide	vgasim.h	/^	virtual	void	on_hide() {$/;"	f	class:VGASIM	typeref:typename:void
@@ -177,18 +180,23 @@ raw_width	videomode.h	/^	int	raw_width(void) const {$/;"	f	class:VIDEOMODE	typer
 reset	testb.h	/^	virtual	void	reset(void) {$/;"	f	class:TESTB	typeref:typename:void
 rows	image.h	/^	int	rows(void) const { return m_width; }$/;"	f	class:IMAGE	typeref:typename:int
 sc_time_stamp	main_tb.cpp	/^double sc_time_stamp () {	\/\/ Called by $time in Verilog$/;"	f	typeref:typename:double
+scanline	main_tb.cpp	/^uint16_t 	scanline = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint16_t	file:
 setline	videomode.h	/^	void	setline(SMODE &m, const char *ln) {$/;"	f	class:VIDEOMODE	typeref:typename:void
 signal_map	vgasim.h	/^	virtual	void	signal_map(void) {$/;"	f	class:VGASIM	typeref:typename:void
+sine_wave	main_tb.cpp	/^uint8_t  sine_wave[256] = {$/;"	v	typeref:typename:uint8_t[256]
 size	image.h	/^	long	size(void) const { return m_height*m_width; }$/;"	f	class:IMAGE	typeref:typename:long
+static_gfx_cfg	main_tb.cpp	/^uint8_t		static_gfx_cfg = 0;$/;"	v	typeref:typename:uint8_t
 sync_lines	videomode.h	/^	int	sync_lines(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
 sync_pixels	videomode.h	/^	int	sync_pixels(void) const {$/;"	f	class:VIDEOMODE	typeref:typename:int
 syncd	vgasim.h	/^	bool	syncd(void) { return !m_out_of_sync; }$/;"	f	class:VGASIM	typeref:typename:bool
 syncd	vgasim.h	/^	bool	syncd(void) { return m_vgasim->syncd(); }$/;"	f	class:VGAWIN	typeref:typename:bool
 tb	main_tb.cpp	/^TESTBENCH	*tb;$/;"	v	typeref:typename:TESTBENCH *
+tektek_scroll	main_tb.cpp	/^uint8_t 	tektek_scroll = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint8_t	file:
 test_input	main_tb.cpp	/^	void	test_input(bool test_data) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 tick	main_tb.cpp	/^	void 	tick(void) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 tick	testb.h	/^	virtual	void	tick(void) {$/;"	f	class:TESTB	typeref:typename:void
 tickcount	testb.h	/^	unsigned long	tickcount(void) {$/;"	f	class:TESTB	typeref:typename:unsigned long
+total_frames	main_tb.cpp	/^uint32_t	total_frames = 0;$/;"	m	class:TESTBENCH	typeref:typename:uint32_t	file:
 trace	main_tb.cpp	/^	void	trace(const char *vcd_trace_file_name) {$/;"	f	class:TESTBENCH	typeref:typename:void	file:
 u16_get_hi	main_tb.cpp	/^#define 	u16_get_hi(/;"	d	file:
 u16_get_lo	main_tb.cpp	/^#define 	u16_get_lo(/;"	d	file:

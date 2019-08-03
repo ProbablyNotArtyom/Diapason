@@ -1,7 +1,7 @@
 
 	`default_nettype wire
-
 	`define ROM_CHARSET_FILE "VGA_PS2.list"
+	/* verilator lint_off WIDTH */
 
 //==============TOPLEVEL==============
 
@@ -42,22 +42,20 @@ wire 	[7:0]	txt_rgb_out;
 
 always @(*) begin
 	/* Only make the busses active if the raster is visible + the Display Enable bit is set */
-	if ((px_address_x >= reg_scroll_x && px_address_y >= reg_scroll_y) && (reg_gfx_mode_select[1] == 0)) begin
+	if (mod_raster_active == 0) begin
 		vram_a_bus = (reg_gfx_mode_select[0] == 1)? int_bmp_a_bus : int_txt_a_bus;
 		vga_rgb_out = (reg_gfx_mode_select[0] == 1)? bmp_rgb_out : txt_rgb_out;
-		mod_raster_active = raster_active;
 	/* Otherwise, we dont need to be using the bus, so tristate it so the host can access VRAM */
 	end else begin
 		vram_a_bus = 24'bz;
 		vga_rgb_out = 8'h00;
-		mod_raster_active = 1;
 	end
 end
 
 //-----------Register Map-----------
 // These registers are acessed using the host bus interface
 
-reg [7:0] reg_gfx_mode_select;		// 0	[1](1 = display disable, 0 = enable) [0](1 = graphics, 0 = text)
+reg [7:0] reg_gfx_mode_select;		// 0	[2](1 = 640x480 scrolling, 0 = 320x240) [1](1 = display disable, 0 = enable) [0](1 = graphics, 0 = text)
 reg [7:0] reg_gfx_mode_config;		// 1
 reg [7:0] reg_scroll_x;				// 2
 reg [7:0] reg_scroll_y;				// 3
@@ -116,7 +114,7 @@ always @(posedge clk_main or posedge reset_in) begin
 		cpu_ack <= 1;
 
 	/* IRQ Generation */
-	if ({reg_raster_hi[1:0], reg_raster_lo} == px_address_y && px_address_x == 0)
+	if (({reg_raster_hi[1:0], reg_raster_lo} == px_address_y && px_address_x == 0) && reg_misc_0[6] == 1)
 		vga_interrupt <= 1'b0;
 end
 
@@ -167,11 +165,22 @@ vga_mode_320x240_bmp vga_bmp_gen(
 	.data_in(vram_d_bus)
 );
 
+assign vga_blank = raster_visible;
+
 //---------Video Modifiers----------
 
 /* Apply the scroll registers to the current pixel coordinates */
 assign mod_px_address_x = (px_address_x >= reg_scroll_x)? px_address_x - reg_scroll_x : 0;
 assign mod_px_address_y = (px_address_y >= reg_scroll_y)? px_address_y - reg_scroll_y : 0;
+
+//----------------------------------
+
+always @(*) begin
+	case(reg_gfx_mode_select[0])
+		1'b0:	mod_raster_active = ((px_address_x >= reg_scroll_x && px_address_y >= reg_scroll_y) && (reg_gfx_mode_select[1] == 0))? 0 : 1;
+		1'b1:	mod_raster_active = ((px_address_x[9:1] >= {1'b0, reg_scroll_x} && px_address_y[9:1] >= {1'b0, reg_scroll_y}) && (reg_gfx_mode_select[1] == 0))? 0 : 1;
+	endcase
+end
 
 //----------------------------------
 

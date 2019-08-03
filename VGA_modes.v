@@ -1,5 +1,6 @@
 
 `default_nettype none
+/* verilator lint_off WIDTH */
 
 `define	CFG_TEXT_40COL	8'b00000001
 `define	CFG_TEXT_15ROW	8'b00000010
@@ -30,10 +31,10 @@ reg		b_state;					// Current mode of the bus. 0 = fetching char data, 1 = fetchi
 
 /* Turn the raw pixel coordinates into the current character cell, and the coordinate of the raster in the current cell */
 always @(posedge clk_in) begin
-	column 	= (mode_config[0])? raster_x[9:4] : raster_x[9:3];
-	row 	= (mode_config[1])? raster_y[9:5] : raster_y[9:4];
-	char_x 	= (mode_config[0])? raster_x[3:1] : raster_x[2:0];
-	char_y 	= (mode_config[1])? raster_y[4:1] : raster_y[3:0];
+	column 	= (mode_config[0] == 1)? {1'b0, raster_x[9:4]} : raster_x[9:3];
+	row 	= (mode_config[1] == 1)? {1'b0, raster_y[9:5]} : raster_y[9:4];
+	char_x 	= (mode_config[0] == 1)? raster_x[3:1] : raster_x[2:0];
+	char_y 	= (mode_config[1] == 1)? raster_y[4:1] : raster_y[3:0];
 end
 
 always @(posedge clk_in) begin
@@ -122,19 +123,28 @@ module vga_mode_320x240_bmp(
 	input	wire	[9:0]	raster_x,
 	input	wire	[9:0]	raster_y,
 	input 	wire	[7:0]	mode_config,
-	output 	wire 	[7:0]	rgb_out,
+	output 	reg 	[7:0]	rgb_out,
 
-	output 	wire	[23:0]	address_out,
+	output 	reg		[23:0]	address_out,
 	input 	wire	[7:0]	data_in
 );
 
 reg [7:0]	mem_val;
 reg			b_state;
 
-/* Currently, this makes the FPGA access video memory pretty much constantly throughout the visible screen */
-/* I have enough bandwidth here to only access every other cycle, which would be a reasonable performance boost */
-/* Currently simple, asynchronous, and seemingly functional; avoid touching for now */
-assign address_out = ((320 * raster_y[9:1]) + raster_x[9:1]);
-assign rgb_out = data_in;
+always @(posedge clk_in) begin
+	if (active == 0) begin
+		if (b_state) begin
+			address_out = ((320 * raster_y[9:1]) + raster_x[9:1]);
+			rgb_out = data_in;
+			b_state = ~b_state;
+		end else begin
+			b_state = 1;
+		end
+	end else begin
+		b_state = 1;
+		rgb_out = 8'h00;
+	end
+end
 
 endmodule
